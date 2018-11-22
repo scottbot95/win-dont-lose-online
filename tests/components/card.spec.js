@@ -31,9 +31,16 @@ describe('<Card /> component', () => {
           .trim()
       ).to.equal(card.title);
     });
+
     it('renders points to an h4 tag if given', () => {
       expect(wrapper.find('h4').text()).to.contain(card.points);
     });
+
+    it('renders an empty h4 tag if points are 0', () => {
+      const noPoints = shallow(<Card card={{ ...card, points: 0 }} />);
+      expect(noPoints.find('h4').text()).to.be.empty;
+    });
+
     it('renders description and flavor text to p tags', () => {
       expect(wrapper.containsMatchingElement(<p>{card.description}</p>)).to.be
         .true;
