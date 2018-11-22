@@ -1,7 +1,27 @@
 import React from 'react';
 
 const Card = props => {
-  return <div className="card" />;
+  const click = () => {
+    if (props.cardSelected !== undefined) {
+      props.cardSelected(props.card);
+    }
+  };
+
+  return (
+    <div className="card" onClick={click}>
+      <h3>{props.card.title}</h3>
+      {props.card.points ? (
+        <h4>
+          {props.card.points > 0 ? '+' : '-'}
+          {props.card.points} Points
+        </h4>
+      ) : (
+        ''
+      )}
+      <p>{props.card.description}</p>
+      <p className="flavor">{props.card.flavor}</p>
+    </div>
+  );
 };
 
 export default Card;
