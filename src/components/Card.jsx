@@ -13,16 +13,26 @@ const Card = props => {
   }
 
   return (
-    <div className="card" onClick={click} style={style}>
-      <h3>{props.card.title}</h3>
-      <h4>
-        {props.card.points
-          ? `${props.card.points > 0 ? '+' : ''}
+    <div
+      className={'card' + (props.faceDown ? ' faceDown' : '')}
+      onClick={click}
+      style={style}
+    >
+      {!props.faceDown ? (
+        <div>
+          <h3>{props.card.title}</h3>
+          <h4>
+            {props.card.points
+              ? `${props.card.points > 0 ? '+' : ''}
           ${props.card.points} Points`
-          : ''}
-      </h4>
-      <p>{props.card.description}</p>
-      <p className="flavor">{props.card.flavor}</p>
+              : ''}
+          </h4>
+          <p>{props.card.description}</p>
+          <p className="flavor">{props.card.flavor}</p>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

@@ -18,6 +18,7 @@ describe('<CardPile /> Component', () => {
     it('shows the appropriate number of cards with a few');
     it('only shows a max number of cards');
     it('shows an indicator of number of cards in the pile');
+    it('propogates `faceDown` prop to all cards');
   });
 
   describe('Functionality', () => {

@@ -23,6 +23,7 @@ const CardList = props => {
           key={card.id}
           card={card}
           selectCard={props.selectCard}
+          faceDown={props.faceDown}
         />
       ))}
     </div>

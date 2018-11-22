@@ -14,17 +14,25 @@ Enzyme.configure({ adapter });
 
 describe('<CardList /> Component', () => {
   let wrapper;
+  let cards;
   const selectSpy = spy();
 
   beforeEach('Create component', () => {
     wrapper = shallow(
       <CardList cards={testHand} selectCard={selectSpy} spread />
     );
+    cards = wrapper.find(Card);
   });
 
   describe('Rendering', () => {
     it('renders the correct number of <Card /> components', () => {
-      expect(wrapper.find(Card)).to.have.property('length', testHand.length);
+      expect(cards).to.have.property('length', testHand.length);
+    });
+    it('propogates `faceDown` prop to all cards', () => {
+      const faceDownList = shallow(<CardList cards={testHand} faceDown />);
+      faceDownList.find(Card).forEach(card => {
+        expect(card.props()).to.have.property('faceDown', true);
+      });
     });
   });
 
@@ -34,7 +42,7 @@ describe('<CardList /> Component', () => {
     });
 
     it("passes it's `selectCard` callback to call cards", () => {
-      wrapper.find(Card).forEach(node => {
+      cards.forEach(node => {
         expect(node.props()).to.have.property('selectCard', selectSpy);
       });
     });

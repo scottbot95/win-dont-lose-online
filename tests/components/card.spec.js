@@ -57,14 +57,36 @@ describe('<Card /> component', () => {
         .true;
       expect(wrapper.containsMatchingElement(<p>{card.flavor}</p>)).to.be.true;
     });
+
     it('scales itself based on the `scale` property', () => {
       expect(wrapper.prop('style').transform).to.contain(`scale(${testScale})`);
     });
+
     it('passes along the given style', () => {
       const style = wrapper.prop('style');
       expect(style.transform).to.contain(testStyle.transform);
       expect(style.left).to.equal(testStyle.left);
       expect(style.top).to.equal(testStyle.top);
+    });
+
+    it('Shows the back of the card if `faceDown` is provided', () => {
+      const faceDown = shallow(<Card card={card} faceDown />);
+
+      expect(faceDown.containsMatchingElement(<p>{card.description}</p>)).to.be
+        .false;
+      expect(faceDown.containsMatchingElement(<p>{card.flavor}</p>)).to.be
+        .false;
+      expect(faceDown.containsMatchingElement(<h3>{card.title}</h3>)).to.be
+        .false;
+      const h4 = faceDown.find('h4');
+      if (h4.length) {
+        expect(h4.text()).to.not.contain(card.points);
+      }
+    });
+
+    it('Adds the appropriate class to a face down card', () => {
+      const faceDown = shallow(<Card card={card} faceDown />);
+      expect(faceDown.hasClass('faceDown')).to.be.true;
     });
   });
 
