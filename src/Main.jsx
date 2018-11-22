@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Card } from './components';
+import { Card, CardList } from './components';
 
-import { card } from '../tests/testData';
+import { card, testHand } from '../tests/testData';
 
 export default class Main extends React.Component {
   constructor() {
@@ -19,7 +19,8 @@ export default class Main extends React.Component {
   render() {
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
-        <Card cardSelected={this.cardSelected} card={card} />
+        {/* <Card selectCard={this.cardSelected} card={card} /> */}
+        <CardList cards={testHand} selectCard={this.cardSelected} />
       </div>
     );
   }

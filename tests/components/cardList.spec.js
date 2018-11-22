@@ -7,14 +7,34 @@ import { spy } from 'sinon';
 
 import { Card, CardList } from '../../src/components';
 
+import { testHand } from '../testData';
+
 const adapter = new Adapter();
 Enzyme.configure({ adapter });
 
 describe('<CardList /> Component', () => {
-  describe('Rendering', () => {
-    it('renders the correct number of <Card /> components');
+  let wrapper;
+  const selectSpy = spy();
+
+  beforeEach('Create component', () => {
+    wrapper = shallow(<CardList cards={testHand} selectCard={selectSpy} />);
   });
+
+  describe('Rendering', () => {
+    it('renders the correct number of <Card /> components', () => {
+      expect(wrapper.find(Card)).to.have.property('length', testHand.length);
+    });
+  });
+
   describe('Functionality', () => {
-    it('calles `selectCard` when a card is clicked');
+    afterEach('Reset spy', () => {
+      selectSpy.resetHistory();
+    });
+
+    it("passes it's `selectCard` callback to call cards", () => {
+      wrapper.find(Card).forEach(node => {
+        expect(node.props()).to.have.property('selectCard', selectSpy);
+      });
+    });
   });
 });

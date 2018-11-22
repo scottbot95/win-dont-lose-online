@@ -18,7 +18,7 @@ describe('<Card /> component', () => {
 
   beforeEach('Create component', () => {
     wrapper = shallow(
-      <Card cardSelected={selectedSpy} card={card} scale={testScale} />
+      <Card selectCard={selectedSpy} card={card} scale={testScale} />
     );
   });
 
@@ -59,12 +59,12 @@ describe('<Card /> component', () => {
       selectedSpy.resetHistory();
     });
 
-    it('calls the `cardSelected` callback on click', () => {
+    it('calls the `selectCard` callback on click', () => {
       wrapper.simulate('click');
       expect(selectedSpy.calledWith(card)).to.be.true;
     });
 
-    it('optionally take an `cardSelected` callback', () => {
+    it('optionally take an `selectCard` callback', () => {
       const noCallback = shallow(<Card card={card} />);
       noCallback.simulate('click');
     });

@@ -2,8 +2,8 @@ import React from 'react';
 
 const Card = props => {
   const click = () => {
-    if (props.cardSelected !== undefined) {
-      props.cardSelected(props.card);
+    if (props.selectCard !== undefined) {
+      props.selectCard(props.card);
     }
   };
 
@@ -17,7 +17,7 @@ const Card = props => {
       <h3>{props.card.title}</h3>
       <h4>
         {props.card.points
-          ? `${props.card.points > 0 ? '+' : '-'}
+          ? `${props.card.points > 0 ? '+' : ''}
           ${props.card.points} Points`
           : ''}
       </h4>
