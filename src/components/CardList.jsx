@@ -6,12 +6,16 @@ const CardList = props => {
   const calcStyle = idx => {
     if (!props.spread) return {};
     const numCards = props.cards.length;
-    const totalRotation = (numCards - 1) * 10;
-    const baseRotation = -1 * (totalRotation / 3);
+    // TODO make the angle difference scale with number of cards
+    const alpha = 10; // angle between
+    const radiusV = 1;
+    const radiusH = 30;
+    const totalRotation = (numCards - 1) * alpha;
+    const theta = -totalRotation / 3 + idx * alpha;
     return {
-      transform: `rotate(${baseRotation + idx * 10}deg)`,
-      top: Math.max(0, (idx - 1) * 5),
-      left: 30 * idx
+      transform: `rotate(${theta}deg)`,
+      top: radiusV * Math.cos(theta),
+      left: radiusH * Math.sin(theta)
     };
   };
 
