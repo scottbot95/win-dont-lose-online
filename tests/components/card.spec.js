@@ -14,11 +14,22 @@ import { card } from '../testData';
 describe('<Card /> component', () => {
   let wrapper;
   const selectedSpy = spy();
+
   const testScale = 0.75;
+  const testStyle = {
+    transform: 'rotate(0deg)',
+    left: 0,
+    top: 0
+  };
 
   beforeEach('Create component', () => {
     wrapper = shallow(
-      <Card selectCard={selectedSpy} card={card} scale={testScale} />
+      <Card
+        style={testStyle}
+        selectCard={selectedSpy}
+        card={card}
+        scale={testScale}
+      />
     );
   });
 
@@ -47,10 +58,13 @@ describe('<Card /> component', () => {
       expect(wrapper.containsMatchingElement(<p>{card.flavor}</p>)).to.be.true;
     });
     it('scales itself based on the `scale` property', () => {
-      expect(wrapper.prop('style')).to.have.property(
-        'transform',
-        `scale(${testScale})`
-      );
+      expect(wrapper.prop('style').transform).to.contain(`scale(${testScale})`);
+    });
+    it('passes along the given style', () => {
+      const style = wrapper.prop('style');
+      expect(style.transform).to.contain(testStyle.transform);
+      expect(style.left).to.equal(testStyle.left);
+      expect(style.top).to.equal(testStyle.top);
     });
   });
 

@@ -17,7 +17,9 @@ describe('<CardList /> Component', () => {
   const selectSpy = spy();
 
   beforeEach('Create component', () => {
-    wrapper = shallow(<CardList cards={testHand} selectCard={selectSpy} />);
+    wrapper = shallow(
+      <CardList cards={testHand} selectCard={selectSpy} spread />
+    );
   });
 
   describe('Rendering', () => {

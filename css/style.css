@@ -13,12 +13,16 @@
   border: 1px solid;
   border-radius: 5px;
   box-shadow: 5px 5px 15px dimgrey;
+  height: 200px;
+  transition: 0.3s ease;
 }
 
 .card:hover {
   transform: scale(1.1);
   transform: translate(-1%, -1%);
   box-shadow: 10px 10px 25px dimgrey;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .card h3,
@@ -29,4 +33,19 @@
 .card .flavor {
   color: gray;
   font-style: italic;
+}
+
+.cardList {
+  margin: 50px;
+  display: flex;
+}
+
+.spread {
+  position: relative;
+}
+
+.spread > .card {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

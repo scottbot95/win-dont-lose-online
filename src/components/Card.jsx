@@ -1,16 +1,16 @@
 import React from 'react';
 
 const Card = props => {
+  const style = { ...props.style };
   const click = () => {
     if (props.selectCard !== undefined) {
       props.selectCard(props.card);
     }
   };
 
-  const style =
-    typeof props.scale === 'number'
-      ? { transform: `scale(${props.scale})` }
-      : {};
+  if (typeof props.scale === 'number') {
+    style.transform += ` scale(${props.scale})`;
+  }
 
   return (
     <div className="card" onClick={click} style={style}>

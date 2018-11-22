@@ -20,7 +20,7 @@ export default class Main extends React.Component {
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
         {/* <Card selectCard={this.cardSelected} card={card} /> */}
-        <CardList cards={testHand} selectCard={this.cardSelected} />
+        <CardList cards={testHand} selectCard={this.cardSelected} spread />
       </div>
     );
   }
