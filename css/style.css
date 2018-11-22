@@ -25,3 +25,8 @@
 .card h4 {
   flex-grow: 0;
 }
+
+.card .flavor {
+  color: gray;
+  font-style: italic;
+}
