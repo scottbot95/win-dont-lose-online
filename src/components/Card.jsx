@@ -7,8 +7,13 @@ const Card = props => {
     }
   };
 
+  const style =
+    typeof props.scale === 'number'
+      ? { transform: `scale(${props.scale})` }
+      : {};
+
   return (
-    <div className="card" onClick={click}>
+    <div className="card" onClick={click} style={style}>
       <h3>{props.card.title}</h3>
       {props.card.points ? (
         <h4>

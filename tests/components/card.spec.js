@@ -14,9 +14,12 @@ import { card } from '../testData';
 describe('<Card /> component', () => {
   let wrapper;
   const selectedSpy = spy();
+  const testScale = 0.75;
 
   beforeEach('Create component', () => {
-    wrapper = shallow(<Card cardSelected={selectedSpy} card={card} />);
+    wrapper = shallow(
+      <Card cardSelected={selectedSpy} card={card} scale={testScale} />
+    );
   });
 
   describe('Rendering', () => {
@@ -35,6 +38,12 @@ describe('<Card /> component', () => {
       expect(wrapper.containsMatchingElement(<p>{card.description}</p>)).to.be
         .true;
       expect(wrapper.containsMatchingElement(<p>{card.flavor}</p>)).to.be.true;
+    });
+    it('scales itself based on the `scale` property', () => {
+      expect(wrapper.prop('style')).to.have.property(
+        'transform',
+        `scale(${testScale})`
+      );
     });
   });
 
