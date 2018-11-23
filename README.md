@@ -23,7 +23,7 @@ This project is currently implemented to use the webpack-dev-server. To start th
 
 | Task                  | Status      | Notes                                                |
 | --------------------- | ----------- | ---------------------------------------------------- |
-| Card Components       | In Progress |
+| Basic Card Components | Complete    |
 | Game Board Components | Not Started |
 | Basic Game Mechanics  | Not Started | Simple things like dynamic player, drawing, and such |
 | Card Mechanics        | Not Started |

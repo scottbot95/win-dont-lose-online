@@ -98,3 +98,17 @@ export const testDeck = [
     flavor: 'happiness?'
   }
 ];
+
+const playerNames = Array(4)
+  .fill(0)
+  .map((_, i) => `Player ${i + 1}`);
+
+export const testPlayers = Array(playerNames.length)
+  .fill(0)
+  .map((_, i) => {
+    return {
+      name: playerNames[i]
+    };
+  });
+
+export const testPlayer = testPlayers[0];
