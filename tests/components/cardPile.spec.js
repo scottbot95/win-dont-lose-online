@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { spy } from 'sinon';
 
 import { CardPile, Card, CardList } from '../../src/components';
 import { testHand, testDeck } from '../testData';
+
+import jsdom from 'jsdom';
+const { document } = new jsdom.JSDOM('').window;
+global.document = document;
+global.window = document.defaultView;
 
 const adapter = new Adapter();
 Enzyme.configure({ adapter });
@@ -16,7 +21,9 @@ describe('<CardPile /> Component', () => {
   const drawSpy = spy();
 
   beforeEach('Create component', () => {
-    wrapper = shallow(<CardPile cards={testHand} faceDown />);
+    wrapper = mount(
+      <CardPile cards={testHand} selectCard={drawSpy} faceDown />
+    );
     cards = wrapper.find(Card);
   });
 
@@ -49,7 +56,8 @@ describe('<CardPile /> Component', () => {
 
     it('properly adds scary class to cards', () => {
       cards.forEach((card, i) => {
-        expect(card.hasClass('scary')).to.equal(!!testHand[i].isScary);
+        console.log(i, card.find('.scary').exists());
+        expect(card.find('.scary').exists()).to.equal(!!testHand[i].isScary);
       });
     });
   });

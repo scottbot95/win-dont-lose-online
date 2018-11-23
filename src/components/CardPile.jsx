@@ -7,11 +7,10 @@ const CardPile = props => {
     <div>
       <div className="cardPile">
         {props.cards.slice(0, 5).map((card, idx) => {
-          const onClick = idx === 0 ? { selectCard: props.selectCard } : '';
           return (
             <Card
               key={card.id}
-              {...onClick}
+              selectCard={idx === 0 && props.selectCard}
               card={card}
               faceDown={props.faceDown}
             />

@@ -3,7 +3,7 @@ import React from 'react';
 const Card = props => {
   const style = { ...props.style };
   const click = () => {
-    if (props.selectCard !== undefined) {
+    if (typeof props.selectCard === 'function') {
       props.selectCard(props.card);
     }
   };
