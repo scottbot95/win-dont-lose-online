@@ -106,7 +106,7 @@ describe('<Card /> component', () => {
 
     it('optionally take an `selectCard` callback', () => {
       const noCallback = shallow(<Card card={card} />);
-      noCallback.simulate('click');
+      noCallback.simulate('click'); // this would crash if it tried to call the callback
     });
   });
 });

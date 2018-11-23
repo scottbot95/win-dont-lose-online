@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardList } from './components';
+import { Card, CardList, CardPile } from './components';
 
 import { card, testHand } from '../tests/testData';
 
@@ -22,6 +22,7 @@ export default class Main extends React.Component {
         {/* <Card selectCard={this.cardSelected} card={card} /> */}
         <CardList cards={testHand} selectCard={this.cardSelected} spread />
         <CardList cards={testHand} selectCard={this.cardSelected} faceDown />
+        <CardPile cards={testHand} selectCard={this.cardSelected} />
       </div>
     );
   }

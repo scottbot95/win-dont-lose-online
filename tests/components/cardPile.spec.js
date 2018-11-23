@@ -12,11 +12,12 @@ const adapter = new Adapter();
 Enzyme.configure({ adapter });
 
 describe('<CardPile /> Component', () => {
-  let wrapper;
+  let wrapper, cards;
   const drawSpy = spy();
 
   beforeEach('Create component', () => {
     wrapper = shallow(<CardPile cards={testHand} faceDown />);
+    cards = wrapper.find(Card);
   });
 
   describe('Rendering', () => {
@@ -26,7 +27,7 @@ describe('<CardPile /> Component', () => {
     });
 
     it('shows the appropriate number of cards with a few', () => {
-      expect(wrapper.find(Card).length).to.equal(testHand.length);
+      expect(cards.length).to.equal(testHand.length);
     });
 
     it('only shows of 5 cards max number of cards', () => {
@@ -35,24 +36,21 @@ describe('<CardPile /> Component', () => {
     });
 
     it('shows an indicator of number of cards in the pile', () => {
-      expect(
-        wrapper.findWhere(n => n.text().contains(testHand.length))
-      ).to.have.property('length', 1);
+      const cardCount = wrapper.find('.cardCount');
+      expect(cardCount).to.have.property('length', 1);
+      expect(cardCount.text()).to.contain(testHand.length);
     });
 
     it('propogates `faceDown` prop to all cards', () => {
-      wrapper.find(Card).forEach(card => {
-        expect(card.props()).to.have.property('faceDown', false);
+      cards.forEach(card => {
+        expect(card.props()).to.have.property('faceDown', true);
       });
     });
 
-    it('properly shows when a scary card is on top', () => {
-      expect(
-        wrapper
-          .find(Card)
-          .first()
-          .hasClass('scary')
-      ).to.be.true;
+    it('properly adds scary class to cards', () => {
+      cards.forEach((card, i) => {
+        expect(card.hasClass('scary')).to.equal(!!testHand[i].isScary);
+      });
     });
   });
 
@@ -61,12 +59,9 @@ describe('<CardPile /> Component', () => {
       drawSpy.resetHistory();
     });
 
-    it('calls `drawCard` when the top card is clicked', () => {
+    it('calls `drawCard` only when the top card is clicked', () => {
       expect(drawSpy).to.have.property('callCount', 0);
-      wrapper
-        .find(Card)
-        .first()
-        .simulate('click');
+      cards.forEach(card => card.simulate('click'));
       expect(drawSpy).to.have.property('callCount', 1);
     });
 

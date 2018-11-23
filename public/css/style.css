@@ -23,6 +23,19 @@
 
 .card.scary {
   position: relative;
+  background: unset;
+}
+
+.card.scary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 5px;
+  background: #e0e0e0;
 }
 
 .card.scary::after {
@@ -34,6 +47,7 @@
   height: 100%;
   z-index: -1;
   opacity: 0.6;
+  border-radius: 5px;
   background-image: url('/scary.svg');
   background-size: cover;
   background-repeat: no-repeat;
