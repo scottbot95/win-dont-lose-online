@@ -44,12 +44,9 @@
   z-index: auto;
 }
 
-.card:hover {
-  transform: scale(1.1);
-  transform: translate(-1%, -1%);
+.card.raise:hover {
   box-shadow: 10px 10px 25px dimgrey;
   cursor: pointer;
-  z-index: 100;
 }
 
 .card > div > * {
@@ -66,6 +63,14 @@
   color: gray;
   font-style: italic;
   background: #ffbb;
+}
+
+.raise:hover {
+  transform: scale(1.1);
+  transform: translate(-1%, -1%);
+  box-shadow: 10px 10px 25px dimgrey;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .cardList {

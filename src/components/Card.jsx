@@ -13,7 +13,7 @@ const Card = props => {
   }
 
   const className =
-    'card' +
+    'card raise' +
     (props.faceDown ? ' faceDown' : '') +
     (props.card.isScary ? ' scary' : '');
 
