@@ -9,6 +9,7 @@ import { CardPile, Card, CardList } from '../../src/components';
 import { testHand, testDeck } from '../testData';
 
 import jsdom from 'jsdom';
+import { exec } from 'child_process';
 const { document } = new jsdom.JSDOM('').window;
 global.document = document;
 global.window = document.defaultView;
@@ -56,8 +57,26 @@ describe('<CardPile /> Component', () => {
 
     it('properly adds scary class to cards', () => {
       cards.forEach((card, i) => {
-        console.log(i, card.find('.scary').exists());
         expect(card.find('.scary').exists()).to.equal(!!testHand[i].isScary);
+      });
+    });
+
+    it('sets the z-index on cards', () => {
+      cards.forEach((card, i) => {
+        expect(card.prop('style')).to.have.property('zIndex', -i);
+      });
+    });
+
+    it('moves the cards on top up and to the left a bit', () => {
+      cards.forEach((card, i) => {
+        if (i !== cards.length - 1) {
+          expect(card.prop('style').top).to.be.lessThan(
+            cards.at(i + 1).prop('style').top
+          );
+          expect(card.prop('style').left).to.be.lessThan(
+            cards.at(i + 1).prop('style').left
+          );
+        }
       });
     });
   });

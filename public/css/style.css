@@ -12,7 +12,7 @@
   width: 150px;
   border: 1px solid;
   border-radius: 5px;
-  box-shadow: 5px 5px 15px dimgrey;
+  box-shadow: 5px 5px 15px #696969cc;
   height: 200px;
   transition: 0.3s ease;
 }
@@ -38,6 +38,11 @@
   background: #e0e0e0;
 }
 
+.card.scary.faceDown::before {
+  background: ;
+  #696969cc;
+}
+
 .card.scary::after {
   content: '';
   position: absolute;
@@ -59,7 +64,7 @@
 }
 
 .card.raise:hover {
-  box-shadow: 10px 10px 25px dimgrey;
+  box-shadow: 10px 10px 25px #696969cc;
   cursor: pointer;
 }
 
@@ -82,7 +87,7 @@
 .raise:hover {
   transform: scale(1.1);
   transform: translate(-1%, -1%);
-  box-shadow: 10px 10px 25px dimgrey;
+  box-shadow: 10px 10px 25px #696969cc;
   cursor: pointer;
   z-index: 100;
 }
@@ -100,4 +105,14 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.cardPile {
+  position: relative;
+}
+
+.cardPile  .card {
+  position: absolute;
+  top: 0;
+  left 0;
 }
