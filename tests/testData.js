@@ -3,11 +3,11 @@ export const card = {
   title: 'Eeyore',
   points: 10,
   description: 'You lose',
-  flavor: 'sadness?'
+  flavor: 'sadness?',
+  isScary: true
 };
 
 export const testHand = [
-  card,
   {
     id: 2,
     title: 'Fake Card',
@@ -21,5 +21,6 @@ export const testHand = [
     points: 0,
     description: 'You win',
     flavor: 'happiness?'
-  }
+  },
+  card
 ];

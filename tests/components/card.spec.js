@@ -88,6 +88,10 @@ describe('<Card /> component', () => {
       const faceDown = shallow(<Card card={card} faceDown />);
       expect(faceDown.hasClass('faceDown')).to.be.true;
     });
+
+    it('Add the appropriate class to scary cards', () => {
+      expect(wrapper.hasClass('scary')).to.be.true;
+    });
   });
 
   describe('Functionality', () => {

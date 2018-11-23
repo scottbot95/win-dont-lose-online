@@ -12,12 +12,13 @@ const Card = props => {
     style.transform += ` scale(${props.scale})`;
   }
 
+  const className =
+    'card' +
+    (props.faceDown ? ' faceDown' : '') +
+    (props.card.isScary ? ' scary' : '');
+
   return (
-    <div
-      className={'card' + (props.faceDown ? ' faceDown' : '')}
-      onClick={click}
-      style={style}
-    >
+    <div className={className} onClick={click} style={style}>
       {!props.faceDown ? (
         <div>
           <h3>{props.card.title}</h3>
