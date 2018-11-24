@@ -97,22 +97,22 @@
   display: flex;
 }
 
-.spread {
+.cardPile {
   position: relative;
 }
 
-.spread > .card {
+.cardPile .card {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.cardPile {
+.circle.container {
   position: relative;
 }
 
-.cardPile  .card {
+.circle.container > * {
   position: absolute;
   top: 0;
-  left 0;
+  left: 0;
 }
