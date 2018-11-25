@@ -18,9 +18,16 @@ describe('<Player /> Component', () => {
   let cardList;
   const cardSpy = spy();
 
+  const style = { background: '#fff' };
+
   beforeEach('Create component', () => {
     wrapper = shallow(
-      <Player cards={testHand} playCard={cardSpy} player={testPlayer} />
+      <Player
+        cards={testHand}
+        playCard={cardSpy}
+        player={testPlayer}
+        style={style}
+      />
     );
     cardList = wrapper.find(CardList);
   });
@@ -45,6 +52,10 @@ describe('<Player /> Component', () => {
 
     it("displays the player's current score", () => {
       expect(wrapper.find('.score').text()).to.contain(testPlayer.points);
+    });
+
+    it("passes the `style` prop it's container", () => {
+      expect(wrapper.prop('style')).to.deep.equal(style);
     });
   });
 });

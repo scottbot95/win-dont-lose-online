@@ -107,7 +107,11 @@ export const testPlayers = Array(playerNames.length)
   .fill(0)
   .map((_, i) => {
     return {
-      name: playerNames[i]
+      name: playerNames[i],
+      hand: testHand.map(c => {
+        return { ...c };
+      }),
+      keepers: []
     };
   });
 

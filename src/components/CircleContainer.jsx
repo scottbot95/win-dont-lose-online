@@ -17,20 +17,6 @@ export default class CircleContainer extends React.Component {
     };
   }
 
-  calcStyle_old(idx) {
-    const numChildren = this.props.children.length;
-    const alpha = this.props.alpha || 360 / numChildren; // angle between
-    const radiusV = this.props.radiusV || this.props.radius || 100;
-    const radiusH = this.props.radiusH || this.props.radius || 100;
-    const totalRotation = (numChildren - 1) * alpha;
-    const theta = -totalRotation / 2 + idx * alpha;
-    return {
-      transform: `rotate(${theta}deg)`,
-      top: radiusV + radiusV * Math.cos(degToRad(theta)),
-      left: radiusH + radiusH * Math.sin(degToRad(theta))
-    };
-  }
-
   // eslint-disable-next-line complexity
   calcStyle(idx) {
     const numChildren = this.props.children.length;
@@ -42,13 +28,16 @@ export default class CircleContainer extends React.Component {
     const radiusV = this.props.radiusV || radius;
     const radiusH = this.props.radiusH || radius;
     const totalRotation = (numChildren - 1) * alpha;
-    const centerPoint = this.props.center || 1 / 2;
-    const theta = -(90 + totalRotation * centerPoint - idx * alpha);
+    const centerPoint =
+      this.props.center === undefined ? 1 / 2 : this.props.center;
+    const startAngle = this.props.startAngle || 90;
+
+    const theta = -(startAngle + totalRotation * centerPoint - idx * alpha);
     let finalRotation;
     switch (this.props.rotate) {
       case 'tangent':
         console.log('tanget rotation');
-        finalRotation = 90;
+        finalRotation = startAngle;
         break;
       case 'none':
       default:
@@ -56,8 +45,10 @@ export default class CircleContainer extends React.Component {
     }
     return {
       transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`,
-      top: (radius * 5) / 4,
-      left: radius / 3
+      // top: (radius * 5) / 4,
+      // left: radius / 3
+      top: radius / 2,
+      left: radius / 2
     };
   }
 
