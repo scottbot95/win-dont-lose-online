@@ -17,7 +17,13 @@ const CardList = props => {
     <div className="cardList">
       {/* TODO make these parameters scale with number of children?*/}
       {props.spread ? (
-        <CircleContainer alpha={10} radiusV={5} radiusH={60}>
+        <CircleContainer
+          alpha={10}
+          radiusV={5}
+          radiusH={60}
+          center={1 / 3}
+          rotate="tangent"
+        >
           {cards}
         </CircleContainer>
       ) : (
