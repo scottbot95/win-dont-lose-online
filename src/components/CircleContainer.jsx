@@ -55,9 +55,9 @@ export default class CircleContainer extends React.Component {
         finalRotation = -theta;
     }
     return {
-      transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`
-      // top: radiusV,
-      // left: radiusH
+      transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`,
+      top: (radius * 5) / 4,
+      left: radius / 3
     };
   }
 
