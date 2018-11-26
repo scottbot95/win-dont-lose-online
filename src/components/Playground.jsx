@@ -15,11 +15,20 @@ export default class Playground extends React.Component {
   }
 
   updateProp(e) {
-    e.persist();
+    const id = e.id;
+    let value;
+    switch (e.target.type) {
+      case 'number':
+        value = Number(e.target.value);
+        break;
+      case 'text':
+      default:
+        value = e.target.value;
+        break;
+    }
     this.setState(state => {
       return {
-        // FIXME casting to number is a cludge. needs to be dynamic
-        props: { ...state.props, [e.target.id]: Number(e.target.value) }
+        props: { ...state.props, [id]: value }
       };
     });
   }
