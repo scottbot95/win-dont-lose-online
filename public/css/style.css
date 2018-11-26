@@ -39,8 +39,7 @@
 }
 
 .card.scary.faceDown::before {
-  background: ;
-  #696969cc;
+  background: #696969cc;
 }
 
 .card.scary::after {

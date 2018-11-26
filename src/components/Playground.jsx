@@ -18,7 +18,8 @@ export default class Playground extends React.Component {
     e.persist();
     this.setState(state => {
       return {
-        props: { ...state.props, [e.target.id]: e.target.value }
+        // FIXME casting to number is a cludge. needs to be dynamic
+        props: { ...state.props, [e.target.id]: Number(e.target.value) }
       };
     });
   }

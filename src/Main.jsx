@@ -49,6 +49,11 @@ export default class Main extends React.Component {
               name: 'startAngle',
               value: 90,
               input: { type: 'number', step: '1' }
+            },
+            {
+              name: 'radius',
+              value: 100,
+              input: { type: 'number', step: '1' }
             }
           ]}
         >
