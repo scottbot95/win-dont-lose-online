@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { Card, CardList, CardPile, Player, GameBoard } from './components';
+import {
+  Card,
+  CardList,
+  CardPile,
+  Player,
+  GameBoard,
+  CircleContainer
+} from './components';
+
+import Playground from './components/Playground';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
 
@@ -29,7 +38,23 @@ export default class Main extends React.Component {
           player={testPlayer}
           me
         /> */}
-        <GameBoard players={testPlayers} />
+        {/* <GameBoard players={testPlayers} /> */}
+        <Playground
+          props={[
+            {
+              name: 'startAngle',
+              value: 90,
+              input: { type: 'number', step: '1' }
+            }
+          ]}
+        >
+          <CircleContainer>
+            <div>a</div>
+            <div>b</div>
+            <div>c</div>
+            <div>d</div>
+          </CircleContainer>
+        </Playground>
       </div>
     );
   }
