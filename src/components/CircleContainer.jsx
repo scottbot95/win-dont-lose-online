@@ -1,10 +1,6 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { isObject } from 'util';
-
-const degToRad = degrees => {
-  return (degrees * Math.PI) / 180;
-};
 
 export default class CircleContainer extends React.Component {
   constructor() {
@@ -17,38 +13,20 @@ export default class CircleContainer extends React.Component {
     };
   }
 
-  // eslint-disable-next-line complexity
   calcStyle(idx) {
+    // needs to calculate `transform`
     const numChildren = this.props.children.length;
-    const alpha = this.props.alpha || 360 / numChildren;
-    const radius =
-      this.props.radius ||
-      Math.max(this.props.radiusV, this.props.radiusH) ||
-      100;
-    const radiusV = this.props.radiusV || radius;
-    const radiusH = this.props.radiusH || radius;
+    const alpha = 360 / numChildren;
+    const radius = this.props.radius;
     const totalRotation = (numChildren - 1) * alpha;
     const centerPoint =
-      this.props.center === undefined ? 1 / 2 : this.props.center;
+      this.props.center !== undefined ? this.props.center : 1 / 2;
     const startAngle = this.props.startAngle || 90;
 
     const theta = -(startAngle + totalRotation * centerPoint - idx * alpha);
-    let finalRotation;
-    switch (this.props.rotate) {
-      case 'tangent':
-        console.log('tanget rotation');
-        finalRotation = startAngle;
-        break;
-      case 'none':
-      default:
-        finalRotation = -theta;
-    }
+    let finalRotation = -theta;
     return {
-      transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`,
-      // top: (radius * 5) / 4,
-      // left: radius / 3
-      top: radius / 2,
-      left: radius / 2
+      transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`
     };
   }
 
@@ -59,37 +37,41 @@ export default class CircleContainer extends React.Component {
   componentDidUpdate() {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this);
-    const bounds = {
-      top: Infinity,
-      left: Infinity,
-      right: -Infinity,
-      bottom: -Infinity
-    };
+
+    let sumWidth = 0;
+    let sumHeight = 0;
+
+    // adjust margin on children to get them to align
+    // along their center instead of top left
     node.childNodes.forEach(child => {
-      const childBox = child.getBoundingClientRect();
-      if (childBox.top < bounds.top) bounds.top = childBox.top;
-      if (childBox.left < bounds.left) bounds.left = childBox.left;
-      if (childBox.right > bounds.right) bounds.right = childBox.right;
-      if (childBox.bottom > bounds.bottom) bounds.bottom = childBox.bottom;
+      const rect = child.getBoundingClientRect();
+      sumWidth += rect.width / 2;
+      sumHeight += rect.height / 2;
+      child.style.margin = `-${rect.height / 2}px -${rect.width / 2}px`;
     });
-    const style = {
-      width: bounds.right - bounds.left,
-      height: bounds.bottom - bounds.top
-    };
-    if (
-      this.state.style.width !== style.width ||
-      this.state.style.height !== style.height
-    ) {
-      this.setState({ style });
-    }
+
+    // calculate padding for container
+    const pY = (sumHeight * Math.SQRT2) / node.childNodes.length;
+    const pX = (sumWidth * Math.SQRT2) / node.childNodes.length;
+    const padding = `${pY}px ${pX}px`;
+    if (this.state.style.padding !== padding)
+      this.setState({ style: { padding } });
   }
 
   render() {
+    const style = {
+      ...this.state.style,
+      width: this.props.radius * 2,
+      height: this.props.radius * 2
+    };
+    const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
     return (
-      <div style={this.state.style} className="circle container">
-        {this.props.children.map((child, idx) => {
-          return React.cloneElement(child, { style: this.calcStyle(idx) });
-        })}
+      <div style={style} className="circleContainer">
+        {this.props.children.map((child, idx) => (
+          <div key={keys[idx] || idx} style={this.calcStyle(idx)}>
+            {child}
+          </div>
+        ))}
       </div>
     );
   }
