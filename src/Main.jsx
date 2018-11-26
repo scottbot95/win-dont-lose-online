@@ -9,17 +9,13 @@ import {
   CircleContainer
 } from './components';
 
-import Container from './components/Container';
+import Playground from './components/Playground';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
 
 export default class Main extends React.Component {
   constructor() {
     super();
-    this.state = {
-      startAngle: 90,
-      radius: 100
-    };
 
     this.cardSelected = this.cardSelected.bind(this);
     this.updateCircle = this.updateCircle.bind(this);
@@ -47,31 +43,22 @@ export default class Main extends React.Component {
           me
         /> */}
         {/* <GameBoard players={testPlayers} /> */}
-        <label htmlFor="startAngle">Start Angle</label>
-        <input
-          id="startAngle"
-          type="number"
-          step="1"
-          value={this.state.startAngle}
-          onChange={this.updateCircle}
-        />
-        <label htmlFor="radius">Radius</label>
-        <input
-          id="radius"
-          type="number"
-          step="1"
-          value={this.state.radius}
-          onChange={this.updateCircle}
-        />
-        <CircleContainer
-          radius={this.state.radius}
-          startAngle={this.state.startAngle}
+        <Playground
+          props={[
+            {
+              name: 'startAngle',
+              value: 90,
+              input: { type: 'number', step: '1' }
+            }
+          ]}
         >
-          <p>a</p>
-          <p>b</p>
-          <p>c</p>
-          <p>d</p>
-        </CircleContainer>
+          <CircleContainer>
+            <p>a</p>
+            <p>b</p>
+            <p>c</p>
+            <p>d</p>
+          </CircleContainer>
+        </Playground>
       </div>
     );
   }
