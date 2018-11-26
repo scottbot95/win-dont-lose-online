@@ -24,7 +24,15 @@ export default class CircleContainer extends React.Component {
     const startAngle = this.props.startAngle || 90;
 
     const theta = -(startAngle + totalRotation * centerPoint - idx * alpha);
-    let finalRotation = -theta;
+    let finalRotation;
+    switch (this.props.rotate) {
+      case 'tangent':
+        finalRotation = startAngle;
+        break;
+      case 'none':
+      default:
+        finalRotation = -theta;
+    }
     return {
       transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`
     };
