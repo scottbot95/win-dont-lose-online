@@ -30,6 +30,23 @@ export default class Main extends React.Component {
   }
 
   render() {
+    const props = [
+      {
+        name: 'startAngle',
+        value: 90,
+        type: 'integer'
+      },
+      {
+        name: 'radius',
+        value: 100,
+        type: 'integer'
+      },
+      {
+        name: 'rotate',
+        value: 'none',
+        type: ['none', 'tanget']
+      }
+    ];
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
         {/* <Card selectCard={this.cardSelected} card={card} /> */}
@@ -43,26 +60,8 @@ export default class Main extends React.Component {
           me
         /> */}
         {/* <GameBoard players={testPlayers} /> */}
-        <Playground
-          props={[
-            {
-              name: 'startAngle',
-              value: 90,
-              type: 'integer'
-            },
-            {
-              name: 'radius',
-              value: 100,
-              type: 'integer'
-            },
-            {
-              name: 'rotate',
-              value: 'none',
-              type: ['none', 'tanget']
-            }
-          ]}
-        >
-          <CircleContainer>
+        <Playground props={props}>
+          <CircleContainer drawCircle>
             <p>a</p>
             <p>b</p>
             <p>c</p>

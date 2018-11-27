@@ -9,7 +9,7 @@ export default class CircleContainer extends React.Component {
     this.calcStyle = this.calcStyle.bind(this);
 
     this.state = {
-      style: {}
+      style: { padding: '0px 0px' }
     };
   }
 
@@ -49,9 +49,10 @@ export default class CircleContainer extends React.Component {
     let sumWidth = 0;
     let sumHeight = 0;
 
+    const children = node.childNodes[0].childNodes;
     // adjust margin on children to get them to align
     // along their center instead of top left
-    node.childNodes.forEach(child => {
+    children.forEach(child => {
       const rect = child.getBoundingClientRect();
       sumWidth += rect.width / 2;
       sumHeight += rect.height / 2;
@@ -59,27 +60,51 @@ export default class CircleContainer extends React.Component {
     });
 
     // calculate padding for container
-    const pY = (sumHeight * Math.SQRT2) / node.childNodes.length;
-    const pX = (sumWidth * Math.SQRT2) / node.childNodes.length;
-    const padding = `${pY}px ${pX}px`;
+    const pY = (sumHeight * Math.SQRT2) / children.length;
+    const pX = (sumWidth * Math.SQRT2) / children.length;
+    const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
+    console.log(padding);
     if (this.state.style.padding !== padding)
       this.setState({ style: { padding } });
   }
 
   render() {
     const style = {
-      ...this.state.style,
       width: this.props.radius * 2,
       height: this.props.radius * 2
     };
+    // wtf was i going to do with this?
+    const [top, left] = this.state.style.padding.split(' ');
     const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
+    const padding = this.state.style.padding;
     return (
-      <div style={style} className="circleContainer">
-        {this.props.children.map((child, idx) => (
-          <div key={keys[idx] || idx} style={this.calcStyle(idx)}>
-            {child}
-          </div>
-        ))}
+      <div style={{ display: 'table', position: 'relative' }}>
+        <div
+          style={{ padding, ...style }}
+          className={
+            'circleContainer' + (this.props.drawCircle ? ' dashed' : '')
+          }
+        >
+          {this.props.children.map((child, idx) => (
+            <div key={keys[idx] || idx} style={this.calcStyle(idx)}>
+              {child}
+            </div>
+          ))}
+        </div>
+        {this.props.drawCircle ? (
+          <div
+            className="circleContainer dashed"
+            style={{
+              ...style,
+              position: 'absolute',
+              top: top.slice(0, -2),
+              left: left.slice(0, -2),
+              zIndex: -1
+            }}
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   }
