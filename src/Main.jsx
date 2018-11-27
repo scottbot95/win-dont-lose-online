@@ -45,6 +45,11 @@ export default class Main extends React.Component {
         name: 'rotate',
         value: 'none',
         type: ['none', 'tanget']
+      },
+      {
+        name: 'drawCircle',
+        value: true,
+        type: 'boolean'
       }
     ];
     return (

@@ -18,6 +18,9 @@ export default class Playground extends React.Component {
     const { propName } = e.target.dataset;
     let value;
     switch (e.target.type) {
+      case 'checkbox':
+        value = e.target.checked;
+        break;
       case 'number':
         value = Number(e.target.value);
         break;
@@ -44,6 +47,10 @@ export default class Playground extends React.Component {
       };
       const type = Array.isArray(property.type) ? 'select-one' : property.type;
       switch (type) {
+        case 'boolean':
+          // eslint-disable-next-line no-case-declarations
+          const { value, ...notValue } = props;
+          return <input {...notValue} type="checkbox" checked={value} />;
         case 'integer':
           return <input {...props} type="number" step="1" />;
         case 'float':
