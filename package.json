@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Win Don't Lose Online",
   "scripts": {
-    "build": "webpack-dev-server --mode=development",
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack --mode=development",
     "test": "mocha ./tests/*.spec.js ./tests/**/*.spec.js --watch --compilers js:babel-core/register --compilers jsx:babel-core/register"
   },
   "author": "",

@@ -106,10 +106,13 @@
   left: 0;
 }
 
+.dashed {
+  border: dashed 1px;
+}
+
 .circleContainer {
   position: relative;
   margin: 1.75em auto 0;
-  border: dashed 1px;
   border-radius: 50%;
 }
 
@@ -120,6 +123,7 @@
   left: 50%;
 }
 
+/* Temporary for testing */
 .circleContainer p {
   width: 4em;
   height: 4em;
