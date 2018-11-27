@@ -85,7 +85,11 @@ export default class CircleContainer extends React.Component {
           }
         >
           {this.props.children.map((child, idx) => (
-            <div key={keys[idx] || idx} style={this.calcStyle(idx)}>
+            <div
+              className="circleElement"
+              key={keys[idx] || idx}
+              style={this.calcStyle(idx)}
+            >
               {child}
             </div>
           ))}

@@ -65,26 +65,15 @@ export default class Main extends React.Component {
         type: 'integer'
       }
     ];
+
+    const cards = testHand.map(card => (
+      <Card key={card.id} card={card} selectCard={this.cardSelected} />
+    ));
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
-        {/* <Card selectCard={this.cardSelected} card={card} /> */}
-        {/* <CardList cards={testHand} selectCard={this.cardSelected} spread /> */}
-        {/* <CardList cards={testHand} selectCard={this.cardSelected} faceDown /> */}
-        {/* <CardPile cards={testHand} selectCard={this.cardSelected} /> */}
-        {/* <Player
-          cards={testHand}
-          playCard={this.cardSelected}
-          player={testPlayer}
-          me
-        /> */}
         {/* <GameBoard players={testPlayers} /> */}
         <Playground props={props}>
-          <CircleContainer drawCircle>
-            <p>a</p>
-            <p>b</p>
-            <p>c</p>
-            <p>d</p>
-          </CircleContainer>
+          <CircleContainer drawCircle>{cards}</CircleContainer>
         </Playground>
       </div>
     );
