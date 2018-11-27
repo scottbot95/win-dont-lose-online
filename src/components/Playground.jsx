@@ -38,6 +38,7 @@ export default class Playground extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line complexity
     const calcInput = property => {
       const props = {
         id: property.name,
@@ -52,9 +53,25 @@ export default class Playground extends React.Component {
           const { value, ...notValue } = props;
           return <input {...notValue} type="checkbox" checked={value} />;
         case 'integer':
-          return <input {...props} type="number" step="1" />;
+          return (
+            <input
+              {...props}
+              type="number"
+              step={property.step || '1'}
+              min={property.min}
+              max={property.max}
+            />
+          );
         case 'float':
-          return <input {...props} type="number" />;
+          return (
+            <input
+              {...props}
+              type="number"
+              step={property.step || '0.1'}
+              min={property.min}
+              max={property.max}
+            />
+          );
         default:
         case 'text':
           return <input {...props} type={type} />;

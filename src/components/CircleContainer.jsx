@@ -13,10 +13,39 @@ export default class CircleContainer extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
+
+  componentDidUpdate() {
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = ReactDOM.findDOMNode(this);
+
+    let sumWidth = 0;
+    let sumHeight = 0;
+
+    const children = node.childNodes[0].childNodes;
+    // adjust margin on children to get them to align
+    // along their center instead of top left
+    children.forEach(child => {
+      const rect = { width: child.clientWidth, height: child.clientHeight };
+      sumWidth += rect.width / 2;
+      sumHeight += rect.height / 2;
+      child.style.margin = `-${rect.height / 2}px -${rect.width / 2}px`;
+    });
+
+    // calculate padding for container
+    const pY = (sumHeight * Math.SQRT2) / children.length;
+    const pX = (sumWidth * Math.SQRT2) / children.length;
+    const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
+    if (this.state.style.padding !== padding)
+      this.setState({ style: { padding } });
+  }
+
   calcStyle(idx) {
     // needs to calculate `transform`
     const numChildren = this.props.children.length;
-    const alpha = 360 / numChildren;
+    const alpha = this.props.alpha || 360 / numChildren;
     const radius = this.props.radius;
     const totalRotation = (numChildren - 1) * alpha;
     const centerPoint =
@@ -36,36 +65,6 @@ export default class CircleContainer extends React.Component {
     return {
       transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`
     };
-  }
-
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
-
-  componentDidUpdate() {
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this);
-
-    let sumWidth = 0;
-    let sumHeight = 0;
-
-    const children = node.childNodes[0].childNodes;
-    // adjust margin on children to get them to align
-    // along their center instead of top left
-    children.forEach(child => {
-      const rect = child.getBoundingClientRect();
-      sumWidth += rect.width / 2;
-      sumHeight += rect.height / 2;
-      child.style.margin = `-${rect.height / 2}px -${rect.width / 2}px`;
-    });
-
-    // calculate padding for container
-    const pY = (sumHeight * Math.SQRT2) / children.length;
-    const pX = (sumWidth * Math.SQRT2) / children.length;
-    const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
-    console.log(padding);
-    if (this.state.style.padding !== padding)
-      this.setState({ style: { padding } });
   }
 
   render() {
