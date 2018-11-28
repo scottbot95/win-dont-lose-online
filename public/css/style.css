@@ -128,12 +128,12 @@
 }
 
 /* Temporary for testing */
-.circleContainer p {
+/* .circleContainer p {
   width: 4em;
   height: 4em;
   background: #0f07;
   margin: 0;
-}
+} */
 
 .circleContainer > *:before {
   position: absolute;
