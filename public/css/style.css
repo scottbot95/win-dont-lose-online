@@ -3,6 +3,26 @@
   height: 100%;
 }
 
+#gameBoard {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#drawPile,
+#discardPile {
+  position: absolute;
+  top: 45%;
+}
+
+#drawPile {
+  left: 35%;
+}
+
+#discardPile {
+  left: 55%;
+}
+
 .card {
   background: #e0e0e0;
   display: flex;
