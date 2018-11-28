@@ -113,7 +113,7 @@ export const testDeck = [
   }
 ];
 
-const playerNames = Array(4)
+const playerNames = Array(3)
   .fill(0)
   .map((_, i) => `Player ${i + 1}`);
 

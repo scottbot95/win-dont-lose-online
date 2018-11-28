@@ -23,6 +23,7 @@ const CardList = props => {
           radiusY={50}
           center={1 / 3}
           rotate="tangent"
+          raise
         >
           {cards}
         </CircleContainer>

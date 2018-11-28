@@ -59,7 +59,7 @@
 }
 
 .card.scary.faceDown::before {
-  background: #696969cc;
+  background: black;
 }
 
 .card.scary::after {
@@ -85,6 +85,8 @@
 .card.raise:hover {
   box-shadow: 10px 10px 25px #696969cc;
   cursor: pointer;
+  transform: scale(1.1);
+  transform: translate(-1%, -1%);
 }
 
 .card > div > * {
@@ -104,14 +106,8 @@
 }
 
 .raise:hover {
-  transform: scale(1.1);
-  transform: translate(-1%, -1%);
   box-shadow: 10px 10px 25px #696969cc;
   cursor: pointer;
-  z-index: 100;
-}
-
-.circleElement:hover {
   z-index: 100;
 }
 

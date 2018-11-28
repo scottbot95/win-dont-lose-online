@@ -1,15 +1,6 @@
 import React from 'react';
 
-import {
-  Card,
-  CardList,
-  CardPile,
-  Player,
-  GameBoard,
-  CircleContainer
-} from './components';
-
-import Playground from './components/Playground';
+import { GameBoard, Card } from './components';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
 

@@ -43,9 +43,9 @@ export default class CircleContainer extends React.Component {
     const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
 
     if (this.autoRadius) {
-      console.log('x', document.documentElement.clientWidth, pX);
       this.radiusX = document.documentElement.clientWidth / 2 - pX;
-      this.radiusY = document.documentElement.clientHeight / 2 - pY;
+      // this.radiusY = document.documentElement.clientHeight / 2 - pY;
+      this.radiusY = this.radiusX;
     }
 
     // if (this.state.style.padding !== padding)
@@ -132,7 +132,7 @@ export default class CircleContainer extends React.Component {
         >
           {React.Children.map(this.props.children, (child, idx) => (
             <div
-              className="circleElement"
+              className={this.props.raise ? 'raise' : ''}
               key={keys[idx] || idx}
               style={this.calcStyle(idx)}
             >
