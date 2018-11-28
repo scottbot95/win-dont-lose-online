@@ -17,13 +17,13 @@
   transition: 0.3s ease;
 }
 
-.card.faceDown {
-  background: black;
-}
-
 .card.scary {
   position: relative;
   background: unset;
+}
+
+.card.faceDown {
+  background: black;
 }
 
 .card.scary::before {

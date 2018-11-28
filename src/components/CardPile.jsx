@@ -4,7 +4,7 @@ import Card from './Card';
 
 const CardPile = props => {
   return (
-    <div>
+    <div id={props.id}>
       <div className="cardPile">
         {props.cards.slice(0, 5).map((card, idx) => {
           const pos = props.cards.length - 1 - idx;

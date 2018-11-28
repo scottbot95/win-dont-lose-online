@@ -19,8 +19,8 @@ const CardList = props => {
       {props.spread ? (
         <CircleContainer
           alpha={10}
-          radiusV={5}
-          radiusH={60}
+          radiusX={50}
+          radiusY={50}
           center={1 / 3}
           rotate="tangent"
         >

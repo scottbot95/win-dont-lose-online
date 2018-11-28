@@ -2,6 +2,9 @@ import React from 'react';
 
 import Player from './Player';
 import CircleContainer from './CircleContainer';
+import CardPile from './CardPile';
+
+import { testDeck } from '../../tests/testData';
 
 export default class NewComponent extends React.Component {
   constructor() {
@@ -27,6 +30,8 @@ export default class NewComponent extends React.Component {
             />
           ))}
         </CircleContainer>
+        <CardPile id="drawPile" cards={testDeck} />
+        <CardPile id="discardPile" faceDown cards={testDeck} />
       </div>
     );
   }

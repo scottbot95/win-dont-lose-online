@@ -87,13 +87,7 @@ export default class Main extends React.Component {
     ));
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
-        {/* <GameBoard players={testPlayers} /> */}
-        <Playground props={props}>
-          <CircleContainer drawCircle>
-            {/* {cards} */}
-            <p>test</p>
-          </CircleContainer>
-        </Playground>
+        <GameBoard players={testPlayers} />
       </div>
     );
   }
