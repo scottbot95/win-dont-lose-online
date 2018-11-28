@@ -6,7 +6,7 @@ import CardPile from './CardPile';
 
 import { testDeck } from '../../tests/testData';
 
-export default class NewComponent extends React.Component {
+export default class GameBoard extends React.Component {
   constructor() {
     super();
     this.state = {};
