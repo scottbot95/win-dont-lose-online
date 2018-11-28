@@ -31,8 +31,8 @@ export default class GameBoard extends React.Component {
             />
           ))}
         </CircleContainer>
-        <CardPile id="drawPile" cards={testDeck} />
-        <CardPile id="discardPile" faceDown cards={testDeck} />
+        <CardPile id="drawPile" faceDown cards={testDeck} />
+        <CardPile id="discardPile" cards={testDeck} />
       </div>
     );
   }

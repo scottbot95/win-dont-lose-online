@@ -12,6 +12,7 @@ const Player = props => {
         selectCard={props.playCard}
         faceDown={!props.me}
         spread
+        raise={props.me}
       />
     </div>
   );

@@ -48,8 +48,8 @@ export default class CircleContainer extends React.Component {
       this.radiusY = this.radiusX;
     }
 
-    // if (this.state.style.padding !== padding)
-    this.setState({ style: { padding } });
+    if (this.state.style.padding !== padding)
+      this.setState({ style: { padding } });
   }
 
   _getOrDefault(prop, def) {

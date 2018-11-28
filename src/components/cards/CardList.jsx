@@ -23,7 +23,7 @@ const CardList = props => {
           radiusY={50}
           center={1 / 3}
           rotate="tangent"
-          raise
+          raise={props.raise}
         >
           {cards}
         </CircleContainer>
@@ -32,6 +32,10 @@ const CardList = props => {
       )}
     </div>
   );
+};
+
+CardList.defaultProps = {
+  raise: true
 };
 
 export default CardList;
