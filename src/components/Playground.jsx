@@ -96,11 +96,9 @@ export default class Playground extends React.Component {
             {calcInput(prop)}
           </div>
         ))}
-        {Array.isArray(this.props.children)
-          ? this.props.children.map((child, i) => {
-              return React.cloneElement(child, { ...this.state.props, key: i });
-            })
-          : React.cloneElement(this.props.children, this.state.props)}
+        {React.Children.map(this.props.children, (child, i) => {
+          return React.cloneElement(child, { ...this.state.props, key: i });
+        })}
       </div>
     );
   }

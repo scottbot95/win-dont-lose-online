@@ -2,19 +2,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const degToRad = deg => (deg * Math.PI) / 180;
+
 export default class CircleContainer extends React.Component {
   constructor() {
     super();
 
-    this.calcStyle = this.calcStyle.bind(this);
-
     this.state = {
       style: { padding: '0px 0px' }
     };
+
+    this.calcStyle = this.calcStyle.bind(this);
   }
 
   componentDidMount() {
     this.componentDidUpdate();
+    this._loadFromProps();
   }
 
   componentDidUpdate() {
@@ -42,35 +45,62 @@ export default class CircleContainer extends React.Component {
       this.setState({ style: { padding } });
   }
 
+  _getOrDefault(prop, def) {
+    return this.props[prop] !== undefined ? this.props[prop] : def;
+  }
+
+  _loadFromProps() {
+    this.numChildren = React.Children.count(this.props.children);
+    this.alpha = this._getOrDefault('alpha', 360 / this.numChildren);
+    this.radius = this.props.radius;
+    this.radiusX = this._getOrDefault('radiusX', this.radius);
+    this.radiusY = this._getOrDefault('radiusY', this.radius);
+    if (typeof this.radiusX !== 'number' || typeof this.radiusY !== 'number') {
+      throw new Error(
+        'Must specify either `radius` or both `radiusX` and `radiusY`'
+      );
+    }
+
+    this.totalRotation = (this.numChildren - 1) * this.alpha;
+    this.centerPoint = this._getOrDefault('center', 0.5);
+    this.startAngle = this._getOrDefault('startAngle', 90);
+  }
+
+  // eslint-disable-next-line complexity
   calcStyle(idx) {
     // needs to calculate `transform`
-    const numChildren = this.props.children.length;
-    const alpha = this.props.alpha || 360 / numChildren;
-    const radius = this.props.radius;
-    const totalRotation = (numChildren - 1) * alpha;
-    const centerPoint =
-      this.props.center !== undefined ? this.props.center : 1 / 2;
-    const startAngle = this.props.startAngle || 90;
 
-    const theta = -(startAngle + totalRotation * centerPoint - idx * alpha);
+    const theta = -(
+      this.startAngle +
+      this.totalRotation * this.centerPoint -
+      idx * this.alpha
+    );
     let finalRotation;
     switch (this.props.rotate) {
       case 'tangent':
-        finalRotation = startAngle;
+        finalRotation = this.startAngle;
         break;
       case 'none':
       default:
         finalRotation = -theta;
     }
-    return {
-      transform: `rotate(${theta}deg) translate(${radius}px) rotate(${finalRotation}deg)`
+
+    const transX = Math.cos(degToRad(theta)) * this.radiusX;
+    const transY = Math.sin(degToRad(theta)) * this.radiusY;
+    const translation = Math.sqrt(transX ** 2 + transY ** 2);
+    // console.log(translation);
+    const style = {
+      transform: `rotate(${theta}deg) translate(${translation}px) rotate(${finalRotation}deg)`
     };
+    return style;
   }
 
   render() {
+    this._loadFromProps();
+
     const style = {
-      width: this.props.radius * 2,
-      height: this.props.radius * 2
+      width: this.radiusX * 2,
+      height: this.radiusY * 2
     };
     // wtf was i going to do with this?
     const [top, left] = this.state.style.padding.split(' ');
@@ -84,7 +114,7 @@ export default class CircleContainer extends React.Component {
             'circleContainer' + (this.props.drawCircle ? ' dashed' : '')
           }
         >
-          {this.props.children.map((child, idx) => (
+          {React.Children.map(this.props.children, (child, idx) => (
             <div
               className="circleElement"
               key={keys[idx] || idx}
