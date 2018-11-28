@@ -41,8 +41,15 @@ export default class CircleContainer extends React.Component {
     const pY = (sumHeight * Math.SQRT2) / children.length;
     const pX = (sumWidth * Math.SQRT2) / children.length;
     const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
-    if (this.state.style.padding !== padding)
-      this.setState({ style: { padding } });
+
+    if (this.autoRadius) {
+      console.log('x', document.documentElement.clientWidth, pX);
+      this.radiusX = document.documentElement.clientWidth / 2 - pX;
+      this.radiusY = document.documentElement.clientHeight / 2 - pY;
+    }
+
+    // if (this.state.style.padding !== padding)
+    this.setState({ style: { padding } });
   }
 
   _getOrDefault(prop, def) {
@@ -52,10 +59,12 @@ export default class CircleContainer extends React.Component {
   _loadFromProps() {
     this.numChildren = React.Children.count(this.props.children);
     this.alpha = this._getOrDefault('alpha', 360 / this.numChildren);
-    this.radius = this.props.radius;
-    this.radiusX = this._getOrDefault('radiusX', this.radius);
-    this.radiusY = this._getOrDefault('radiusY', this.radius);
-    if (typeof this.radiusX !== 'number' || typeof this.radiusY !== 'number') {
+    this.autoRadius = +(this.props.radius === 'auto'); // 0 or 1 instead of true or false
+    this.radius = this.autoRadius || this.props.radius;
+
+    this.radiusX = this.radiusX || this._getOrDefault('radiusX', this.radius);
+    this.radiusY = this.radiusY || this._getOrDefault('radiusY', this.radius);
+    if (this.radiusX === undefined || this.radiusY === undefined) {
       throw new Error(
         'Must specify either `radius` or both `radiusX` and `radiusY`'
       );
@@ -64,6 +73,13 @@ export default class CircleContainer extends React.Component {
     this.totalRotation = (this.numChildren - 1) * this.alpha;
     this.centerPoint = this._getOrDefault('center', 0.5);
     this.startAngle = this._getOrDefault('startAngle', 90);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps !== this.props ||
+      nextState.style.padding !== this.state.style.padding
+    );
   }
 
   // eslint-disable-next-line complexity

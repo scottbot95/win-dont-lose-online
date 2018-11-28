@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from './Card';
-import CircleContainer from './CircleContainer';
+import CircleContainer from '../CircleContainer';
 
 const CardList = props => {
   const cards = props.cards.map(card => (
