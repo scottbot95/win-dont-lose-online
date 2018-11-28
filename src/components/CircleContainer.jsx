@@ -85,9 +85,9 @@ export default class CircleContainer extends React.Component {
         finalRotation = -theta;
     }
 
-    const transX = Math.cos(degToRad(theta)) * this.radiusX;
-    const transY = Math.sin(degToRad(theta)) * this.radiusY;
-    const translation = Math.sqrt(transX ** 2 + transY ** 2);
+    const transX = Math.cos(degToRad(theta)) / this.radiusX;
+    const transY = Math.sin(degToRad(theta)) / this.radiusY;
+    const translation = Math.sqrt(1 / (transX ** 2 + transY ** 2));
     // console.log(translation);
     const style = {
       transform: `rotate(${theta}deg) translate(${translation}px) rotate(${finalRotation}deg)`
