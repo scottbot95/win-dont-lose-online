@@ -22,6 +22,20 @@ export const testHand = [
     description: 'You win',
     flavor: 'happiness?'
   },
+  {
+    id: 4,
+    title: 'Fake Card 2',
+    points: 0,
+    description: 'You win',
+    flavor: 'happiness?'
+  },
+  {
+    id: 5,
+    title: 'Fake Card 2',
+    points: 0,
+    description: 'You win',
+    flavor: 'happiness?'
+  },
   card
 ];
 
