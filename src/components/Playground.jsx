@@ -75,7 +75,7 @@ export default class Playground extends React.Component {
       <div>
         {this.props.props.map((prop, i) => (
           <div key={i}>
-            <label htmlFor={prop.name}>{prop.name}</label>
+            <label htmlFor={prop.name}>{prop.label || prop.name}:</label>
             {calcInput(prop)}
           </div>
         ))}

@@ -32,21 +32,25 @@ export default class Main extends React.Component {
   render() {
     const props = [
       {
+        label: 'Start Angle',
         name: 'startAngle',
         value: 90,
         type: 'integer'
       },
       {
+        label: 'Circle Radius',
         name: 'radius',
         value: 100,
         type: 'integer'
       },
       {
+        label: 'Post Rotation Type',
         name: 'rotate',
         value: 'none',
         type: ['none', 'tanget']
       },
       {
+        label: 'Draw Circles?',
         name: 'drawCircle',
         value: true,
         type: 'boolean'
