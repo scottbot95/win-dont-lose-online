@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from './Card';
-import CircleContainer from '../CircleContainer';
+import CirclePlacer from '../CirclePlacer';
 
 const CardList = props => {
   const cards = props.cards.map(card => (
@@ -17,7 +17,7 @@ const CardList = props => {
     <div className="cardList">
       {/* TODO make these parameters scale with number of children?*/}
       {props.spread ? (
-        <CircleContainer
+        <CirclePlacer
           alpha={10}
           radiusX={50}
           radiusY={50}
@@ -26,7 +26,7 @@ const CardList = props => {
           raise={props.raise}
         >
           {cards}
-        </CircleContainer>
+        </CirclePlacer>
       ) : (
         cards
       )}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Player from './Player';
-import CircleContainer from '../CircleContainer';
+import CirclePlacer from '../CirclePlacer';
 import CardPile from '../cards/CardPile';
 
 import { testDeck } from '../../../tests/testData';
@@ -15,7 +15,7 @@ export default class GameBoard extends React.Component {
   render() {
     return (
       <div id="gameBoard">
-        <CircleContainer
+        <CirclePlacer
           radius="auto"
           // radius={500}
           // center={2 / (this.props.players.length - 1)}
@@ -30,7 +30,7 @@ export default class GameBoard extends React.Component {
               me={i === 0}
             />
           ))}
-        </CircleContainer>
+        </CirclePlacer>
         <CardPile id="drawPile" faceDown cards={testDeck} />
         <CardPile id="discardPile" cards={testDeck} />
       </div>

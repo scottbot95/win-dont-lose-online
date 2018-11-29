@@ -1,10 +1,11 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CircleRenderer from './CircleRenderer';
 
 const degToRad = deg => (deg * Math.PI) / 180;
 
-export default class CircleContainer extends React.Component {
+export default class CirclePlacer extends React.Component {
   constructor() {
     super();
 
@@ -121,47 +122,29 @@ export default class CircleContainer extends React.Component {
   render() {
     this._loadFromProps();
 
-    const style = {
-      width: this.radiusX * 2,
-      height: this.radiusY * 2
-    };
-    // wtf was i going to do with this?
-    const [top, left] = this.state.style.padding.split(' ');
     const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
-    const padding = this.state.style.padding;
-    return (
-      <div style={{ display: 'table', position: 'relative' }}>
-        <div
-          style={{ padding, ...style }}
-          className={
-            'circleContainer' + (this.props.drawCircle ? ' dashed' : '')
-          }
-        >
-          {React.Children.map(this.props.children, (child, idx) => (
-            <div
-              className={this.props.raise ? 'raise' : ''}
-              key={keys[idx] || idx}
-              style={this.calcStyle(idx)}
-            >
-              {child}
-            </div>
-          ))}
-        </div>
-        {this.props.drawCircle ? (
-          <div
-            className="circleContainer dashed"
-            style={{
-              ...style,
-              position: 'absolute',
-              top: top.slice(0, -2),
-              left: left.slice(0, -2),
-              zIndex: -1
-            }}
-          />
-        ) : (
-          ''
-        )}
+
+    const children = React.Children.map(this.props.children, (child, idx) => (
+      <div
+        className={this.props.raise ? 'raise' : ''}
+        key={keys[idx] || idx}
+        style={this.calcStyle(idx)}
+      >
+        {child}
       </div>
-    );
+    ));
+
+    const padding = this.state.style.padding;
+
+    const props = {
+      radiusX: this.radiusX,
+      radiusY: this.radiusY,
+      drawCircle: this.props.drawCircle,
+      padding
+    };
+
+    const renderer = <CircleRenderer {...props}>{children}</CircleRenderer>;
+
+    return renderer;
   }
 }

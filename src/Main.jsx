@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GameBoard, Player, CircleContainer, Card } from './components';
+import { GameBoard, Player, CirclePlacer, Card } from './components';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
 import Playground from './components/Playground';
@@ -83,7 +83,7 @@ export default class Main extends React.Component {
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
         <Playground props={props}>
-          <CircleContainer>{cards}</CircleContainer>
+          <CirclePlacer>{cards}</CirclePlacer>
         </Playground>
         {/* <GameBoard players={testPlayers} /> */}
         {/* <Player player={testPlayer} cards={testPlayer.hand} me /> */}

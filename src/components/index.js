@@ -1,5 +1,5 @@
-import CircleContainer from './CircleContainer';
+import CirclePlacer from './CirclePlacer';
 
 export * from './cards';
 export * from './game';
-export { CircleContainer };
+export { CirclePlacer };

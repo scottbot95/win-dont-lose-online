@@ -5,7 +5,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { spy } from 'sinon';
 
-import { Card, CardList, CircleContainer } from '../../src/components';
+import { Card, CardList, CirclePlacer } from '../../src/components';
 
 import { testHand } from '../testData';
 
@@ -37,15 +37,15 @@ describe('<CardList /> Component', () => {
     });
 
     it('renders cards in a circle if `spread` prop is provided', () => {
-      expect(wrapper.find(CircleContainer).exists()).to.be.true;
-      expect(wrapper.find(CircleContainer).find(Card).length).to.equal(
+      expect(wrapper.find(CirclePlacer).exists()).to.be.true;
+      expect(wrapper.find(CirclePlacer).find(Card).length).to.equal(
         testHand.length
       );
     });
 
-    it("does't use the `CircleContainer` if `spread isn't provided", () => {
+    it("does't use the `CirclePlacer` if `spread isn't provided", () => {
       const noSpread = shallow(<CardList cards={testHand} />);
-      expect(noSpread.find(CircleContainer).exists()).to.be.false;
+      expect(noSpread.find(CirclePlacer).exists()).to.be.false;
     });
   });
 
