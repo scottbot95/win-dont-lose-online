@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GameBoard, Card } from './components';
+import { GameBoard, Player } from './components';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
 
@@ -73,12 +73,10 @@ export default class Main extends React.Component {
       }
     ];
 
-    const cards = testHand.map(card => (
-      <Card key={card.id} card={card} selectCard={this.cardSelected} />
-    ));
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
-        <GameBoard players={testPlayers} />
+        {/* <GameBoard players={testPlayers} /> */}
+        <Player player={testPlayer} cards={testPlayer.hand} me />
       </div>
     );
   }
