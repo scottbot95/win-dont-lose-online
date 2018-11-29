@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { GameBoard, Player } from './components';
+import { GameBoard, Player, CircleContainer, Card } from './components';
 
 import { card, testHand, testPlayer, testPlayers } from '../tests/testData';
+import Playground from './components/Playground';
 
 export default class Main extends React.Component {
   constructor() {
@@ -73,10 +74,19 @@ export default class Main extends React.Component {
       }
     ];
 
+    const cards = testPlayer.hand.map(c => (
+      <p key={c.id} card={c}>
+        {card.name}
+      </p>
+    ));
+
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
+        <Playground props={props}>
+          <CircleContainer>{cards}</CircleContainer>
+        </Playground>
         {/* <GameBoard players={testPlayers} /> */}
-        <Player player={testPlayer} cards={testPlayer.hand} me />
+        {/* <Player player={testPlayer} cards={testPlayer.hand} me /> */}
       </div>
     );
   }

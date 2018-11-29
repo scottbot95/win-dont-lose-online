@@ -16,17 +16,31 @@ export default class CircleContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.componentDidUpdate();
+    console.log('mount');
+    this.updatePadding();
     this._loadFromProps();
   }
 
-  componentDidUpdate() {
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this);
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps !== this.props ||
+      nextState.style.padding !== this.state.style.padding
+    );
+  }
 
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
+  componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/no-find-dom-node
+    this.updatePadding();
+  }
+
+  updatePadding() {
+    const node = ReactDOM.findDOMNode(this);
     let sumWidth = 0;
     let sumHeight = 0;
-
     const children = node.childNodes[0].childNodes;
     // adjust margin on children to get them to align
     // along their center instead of top left
@@ -36,20 +50,20 @@ export default class CircleContainer extends React.Component {
       sumHeight += rect.height / 2;
       child.style.margin = `-${rect.height / 2}px -${rect.width / 2}px`;
     });
-
     // calculate padding for container
     const pY = (sumHeight * Math.SQRT2) / children.length;
     const pX = (sumWidth * Math.SQRT2) / children.length;
     const padding = `${pY.toFixed(2)}px ${pX.toFixed(2)}px`;
-
     if (this.autoRadius) {
       this.radiusX = document.documentElement.clientWidth / 2 - pX;
       // this.radiusY = document.documentElement.clientHeight / 2 - pY;
       this.radiusY = this.radiusX;
     }
-
-    if (this.state.style.padding !== padding)
+    if (this.state.style.padding !== padding) {
+      // console.log(this.state.style.padding, '|', padding);
+      // setTimeout(() => this.setState({ style: { padding } }), 1000);
       this.setState({ style: { padding } });
+    }
   }
 
   _getOrDefault(prop, def) {
@@ -73,13 +87,6 @@ export default class CircleContainer extends React.Component {
     this.totalRotation = (this.numChildren - 1) * this.alpha;
     this.centerPoint = this._getOrDefault('center', 0.5);
     this.startAngle = this._getOrDefault('startAngle', 90);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextProps !== this.props ||
-      nextState.style.padding !== this.state.style.padding
-    );
   }
 
   // eslint-disable-next-line complexity
