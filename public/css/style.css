@@ -126,8 +126,8 @@
 }
 
 .cardList {
-  margin: 50px;
-  display: flex;
+  /* margin: 50px; */
+  display: inline-block;
 }
 
 .cardPile {
