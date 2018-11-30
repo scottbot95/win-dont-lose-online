@@ -85,8 +85,8 @@ export default class Main extends React.Component {
         {/* <Playground props={props}>
           <CirclePlacer>{cards}</CirclePlacer>
         </Playground> */}
-        {/* <GameBoard players={testPlayers} /> */}
-        <Player player={testPlayer} cards={testPlayer.hand} me />
+        <GameBoard players={testPlayers} />
+        {/* <Player player={testPlayer} cards={testPlayer.hand} me /> */}
       </div>
     );
   }

@@ -91,13 +91,13 @@ export default class CirclePlacer extends React.Component {
 
     const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
 
-    const children = React.Children.map(this.props.children, (child, idx) => (
-      <div className={this.props.raise ? 'raise' : ''} key={keys[idx] || idx}>
-        {child}
-      </div>
-    ));
+    // const children = React.Children.map(this.props.children, (child, idx) => (
+    //   <div className={this.props.raise ? 'raise' : ''} key={keys[idx] || idx}>
+    //     {child}
+    //   </div>
+    // ));
 
-    // const children = this.props.children;
+    const children = this.props.children;
 
     const padding = this.state.style.padding;
 
@@ -108,6 +108,7 @@ export default class CirclePlacer extends React.Component {
       startAngle: this.startAngle + this.totalRotation * this.centerPoint,
       alpha: this.alpha,
       rotate: this.props.rotate,
+      passTheta: this.props.passTheta,
       padding
     };
 

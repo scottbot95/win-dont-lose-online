@@ -2,8 +2,7 @@ import React from 'react';
 
 const degToRad = deg => (deg * Math.PI) / 180;
 
-const calcStyle = (props, i) => {
-  const theta = -(props.startAngle - i * props.alpha);
+const calcStyle = (props, theta) => {
   let finalRotation;
   switch (props.rotate) {
     case 'tangent':
@@ -49,11 +48,12 @@ const CircleRenderer = props => {
         style={{ padding, ...style }}
         className={'circleContainer' + (props.drawCircles ? ' dashed' : '')}
       >
-        {React.Children.map(props.children, (child, i) =>
-          React.cloneElement(child, {
-            style: calcStyle(props, i)
-          })
-        )}
+        {React.Children.map(props.children, (child, i) => {
+          const theta = -(props.startAngle - i * props.alpha);
+          const childProps = { style: calcStyle(props, theta) };
+          if (props.passTheta) childProps[props.passTheta] = theta;
+          return React.cloneElement(child, childProps);
+        })}
       </div>
       {innerCircle}
     </div>

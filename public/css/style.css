@@ -151,10 +151,18 @@
 }
 
 .circleContainer > * {
-  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.player {
+  display: inline-block;
+}
+
+.player > div:first-child {
+  display: flex;
+  justify-content: center;
 }
 
 /* Temporary for testing */
@@ -165,7 +173,7 @@
   margin: 0;
 } */
 
-.circleContainer > *:before {
+/* .circleContainer > *:before {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -176,4 +184,4 @@
   background: black;
   border-radius: 50%;
   opacity: 0.6;
-}
+} */

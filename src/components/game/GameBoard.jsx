@@ -16,11 +16,12 @@ export default class GameBoard extends React.Component {
     return (
       <div id="gameBoard">
         <CirclePlacer
-          radius="auto"
-          // radius={500}
+          // radius="auto"
+          radius={500}
           // center={2 / (this.props.players.length - 1)}
           center={0}
           startAngle={-90}
+          passTheta="rotate"
         >
           {this.props.players.map((player, i) => (
             <Player
