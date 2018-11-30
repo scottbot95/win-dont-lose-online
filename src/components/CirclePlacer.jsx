@@ -3,8 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CircleRenderer from './CircleRenderer';
 
-const degToRad = deg => (deg * Math.PI) / 180;
-
 export default class CirclePlacer extends React.Component {
   constructor() {
     super();
@@ -12,8 +10,6 @@ export default class CirclePlacer extends React.Component {
     this.state = {
       style: { padding: '0px 0px' }
     };
-
-    this.calcStyle = this.calcStyle.bind(this);
   }
 
   componentDidMount() {
@@ -73,7 +69,7 @@ export default class CirclePlacer extends React.Component {
 
   _loadFromProps() {
     this.numChildren = React.Children.count(this.props.children);
-    this.alpha = this._getOrDefault('alpha', 360 / this.numChildren);
+    this.alpha = this.props.alpha || 360 / this.numChildren;
     this.autoRadius = +(this.props.radius === 'auto'); // 0 or 1 instead of true or false
     this.radius = this.autoRadius || this.props.radius;
 
@@ -90,56 +86,28 @@ export default class CirclePlacer extends React.Component {
     this.startAngle = this._getOrDefault('startAngle', 90);
   }
 
-  // eslint-disable-next-line complexity
-  calcStyle(idx) {
-    // needs to calculate `transform`
-
-    const theta = -(
-      this.startAngle +
-      this.totalRotation * this.centerPoint -
-      idx * this.alpha
-    );
-    let finalRotation;
-    switch (this.props.rotate) {
-      case 'tangent':
-        finalRotation = this.startAngle;
-        break;
-      case 'none':
-      default:
-        finalRotation = -theta;
-    }
-
-    const transX = Math.cos(degToRad(theta)) / this.radiusX;
-    const transY = Math.sin(degToRad(theta)) / this.radiusY;
-    const translation = Math.sqrt(1 / (transX ** 2 + transY ** 2));
-    // console.log(translation);
-    const style = {
-      transform: `rotate(${theta}deg) translate(${translation}px) rotate(${finalRotation}deg)`
-    };
-    return style;
-  }
-
   render() {
     this._loadFromProps();
 
     const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
 
     const children = React.Children.map(this.props.children, (child, idx) => (
-      <div
-        className={this.props.raise ? 'raise' : ''}
-        key={keys[idx] || idx}
-        style={this.calcStyle(idx)}
-      >
+      <div className={this.props.raise ? 'raise' : ''} key={keys[idx] || idx}>
         {child}
       </div>
     ));
+
+    // const children = this.props.children;
 
     const padding = this.state.style.padding;
 
     const props = {
       radiusX: this.radiusX,
       radiusY: this.radiusY,
-      drawCircle: this.props.drawCircle,
+      drawCircles: this.props.drawCircles,
+      startAngle: this.startAngle + this.totalRotation * this.centerPoint,
+      alpha: this.alpha,
+      rotate: this.props.rotate,
       padding
     };
 
@@ -148,3 +116,7 @@ export default class CirclePlacer extends React.Component {
     return renderer;
   }
 }
+
+CirclePlacer.defaultProps = {
+  startAngle: 90
+};

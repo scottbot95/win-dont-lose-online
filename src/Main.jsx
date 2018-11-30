@@ -55,7 +55,7 @@ export default class Main extends React.Component {
       },
       {
         label: 'Draw Circles?',
-        name: 'drawCircle',
+        name: 'drawCircles',
         value: true,
         type: 'boolean'
       },
@@ -82,11 +82,11 @@ export default class Main extends React.Component {
 
     return (
       <div style={{ paddingLeft: 50, paddingTop: 50 }}>
-        <Playground props={props}>
+        {/* <Playground props={props}>
           <CirclePlacer>{cards}</CirclePlacer>
-        </Playground>
+        </Playground> */}
         {/* <GameBoard players={testPlayers} /> */}
-        {/* <Player player={testPlayer} cards={testPlayer.hand} me /> */}
+        <Player player={testPlayer} cards={testPlayer.hand} me />
       </div>
     );
   }
