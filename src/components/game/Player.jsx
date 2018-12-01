@@ -11,7 +11,7 @@ const Player = props => {
       </div>
       <div style={{ transform: `rotate(${props.rotate - 90}deg)` }}>
         <CardList
-          cards={props.cards}
+          cards={props.player.hand}
           selectCard={props.playCard}
           faceDown={!props.me}
           spread
