@@ -1,4 +1,4 @@
-import Card from './Card';
+import Card from './cards/Card';
 import Player from './Player';
 
 export { Card, Player };

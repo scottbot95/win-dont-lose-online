@@ -5,7 +5,6 @@ export default class Card {
     // }
     const defs = {
       title: 'Title',
-      points: 0,
       description: 'Insert filler text here',
       flavor: 'Filler? I hardly know her!',
       isScary: false
@@ -16,10 +15,6 @@ export default class Card {
 
   get title() {
     return this._data.title;
-  }
-
-  get points() {
-    return this._data.points;
   }
 
   get description() {
