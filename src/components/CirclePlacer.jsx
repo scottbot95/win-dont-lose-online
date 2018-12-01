@@ -89,7 +89,7 @@ export default class CirclePlacer extends React.Component {
   render() {
     this._loadFromProps();
 
-    const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
+    // const keys = Array.isArray(this.props.keys) ? this.props.keys : [];
 
     // const children = React.Children.map(this.props.children, (child, idx) => (
     //   <div className={this.props.raise ? 'raise' : ''} key={keys[idx] || idx}>
