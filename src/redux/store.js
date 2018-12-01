@@ -1,6 +1,8 @@
 /* eslint-disable no-case-declarations */
 import { createStore, compose, applyMiddleware } from 'redux';
 
+import { Player } from '../game';
+
 // ACTION TYPES
 const ADD_PLAYER = 'ADD_PLAYER';
 const START_GAME = 'START_GAME';
