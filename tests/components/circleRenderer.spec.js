@@ -12,7 +12,7 @@ Enzyme.configure({ adapter });
 
 const degToRad = deg => (deg * Math.PI) / 180;
 
-describe.only('<CircleRenderer /> Component', () => {
+describe('<CircleRenderer /> Component', () => {
   const numChildren = 4;
   let wrapperProps = {
     alpha: 10,

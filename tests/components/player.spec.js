@@ -22,24 +22,15 @@ describe('<Player /> Component', () => {
 
   beforeEach('Create component', () => {
     wrapper = shallow(
-      <Player
-        cards={testHand}
-        playCard={cardSpy}
-        player={testPlayer}
-        style={style}
-      />
+      <Player playCard={cardSpy} player={testPlayer} style={style} />
     );
-    cardList = wrapper.find(CardList);
+    cardList = wrapper.find(CardList).first();
   });
 
   describe('Rendering', () => {
     it('displays the players name', () => {
       expect(wrapper.containsMatchingElement(<p>{testPlayer.name}</p>)).to.be
         .true;
-    });
-
-    it("passes it's `cards` prop along to it's list", () => {
-      expect(cardList.props()).to.have.property('cards', testHand);
     });
 
     it("cards are `faceDown` if `me` isn't provided", () => {
