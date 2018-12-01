@@ -1,27 +1,42 @@
 export default class Card {
-  constructor() {
-    if (this.constructor === Card) {
-      throw new Error('Cannot insaniate `Card` class');
-    }
+  constructor(options) {
+    // if (this.constructor === Card) {
+    //   throw new Error('Cannot insaniate `Card` class');
+    // }
+    const defs = {
+      title: 'Title',
+      points: 0,
+      description: 'Insert filler text here',
+      flavor: 'Filler? I hardly know her!',
+      isScary: false
+    };
+
+    this._data = Object.assign({}, defs, options);
   }
 
   get title() {
-    return 'Title';
+    return this._data.title;
   }
 
   get points() {
-    return 0;
+    return this._data.points;
   }
 
   get description() {
-    return 'Insert filler text here';
+    return this._data.description;
   }
 
   get flavor() {
-    return 'Filler? I hardly know her!';
+    return this._data.flavor;
   }
 
   get isScary() {
-    return false;
+    return this._data.isScary;
+  }
+
+  playCard() {
+    if (typeof this._data.applyAction === 'function') {
+      this._data.applyAction(...arguments);
+    }
   }
 }
