@@ -5,7 +5,7 @@ import CardList from '../cards/CardList';
 const Player = props => {
   return (
     <div className="player" style={props.style}>
-      <div>
+      <div className="info">
         <p className="playerName">{props.player.name}</p>
         <p className="score">{props.player.points || 0} Points</p>
       </div>

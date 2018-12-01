@@ -14,7 +14,8 @@ const END_GAME = 'END_GAME';
 
 // ACTION CREATORS
 export const addPlayer = player => {
-  // throw if player not instanceof player class
+  if (!(player instanceof Player))
+    throw new Error('player must be an instance of Player class');
   return {
     type: ADD_PLAYER,
     player
@@ -33,12 +34,17 @@ export const endTurn = () => ({ type: END_TURN });
 
 export const endGame = () => ({ type: END_GAME });
 
+// Enums
+
+export const GameStateEnum = { PENDING: 1, PLAYING: 2, POSTGAME: 3 };
+Object.freeze(GameStateEnum);
+
 const initalState = {
   players: [],
   drawPile: [],
   discardPile: [],
-  status: 'pending',
-  turn: 'pending'
+  status: GameStateEnum.PENDING,
+  turn: GameStateEnum.PENDING
 };
 
 // eslint-disable-next-line complexity
@@ -47,8 +53,13 @@ const reducer = (state = initalState, action) => {
     case ADD_PLAYER:
       return { ...state, players: [...state.players, action.player] };
     case START_GAME:
-      if (state.players.length < 2) throw new Error('');
-      return { ...state, status: 'playing', turn: state.players[0].name };
+      if (state.players.length < 2)
+        throw new Error('Cannot start game with less than two players.');
+      return {
+        ...state,
+        status: GameStateEnum.PLAYING,
+        turn: state.players[0].name
+      };
     case DRAW_CARD:
     case PLAY_CARD:
     case DISCARD_CARD:
@@ -61,7 +72,7 @@ const reducer = (state = initalState, action) => {
         turn: state.players[(playerIdx + 1) % state.players.length].name
       };
     case END_GAME:
-      return { ...state, status: 'postgame' };
+      return { ...state, status: GameStateEnum.POSTGAME };
     default:
       return state;
   }

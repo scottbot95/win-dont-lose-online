@@ -160,9 +160,20 @@
   display: inline-block;
 }
 
-.player > div:first-child {
+.player > .info {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.player > .info > p {
+  white-space: nowrap;
+  flex: 1 1 auto;
+  position: relative;
+  text-align: center;
+}
+
+.player > .info > p:not(:last-of-type) {
+  border-right: solid 1px black;
 }
 
 /* Temporary for testing */
