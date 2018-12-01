@@ -4,13 +4,18 @@ export default class Card {
     //   throw new Error('Cannot insaniate `Card` class');
     // }
     const defs = {
-      title: 'Title',
-      description: 'Insert filler text here',
-      flavor: 'Filler? I hardly know her!',
+      title: "Title",
+      description: "Insert filler text here",
+      flavor: "Filler? I hardly know her!",
       isScary: false
     };
 
     this._data = Object.assign({}, defs, options);
+    this._symbol = Symbol(this._data.title);
+  }
+
+  get id() {
+    return this._symbol;
   }
 
   get title() {
@@ -30,7 +35,7 @@ export default class Card {
   }
 
   playCard() {
-    if (typeof this._data.applyAction === 'function') {
+    if (typeof this._data.applyAction === "function") {
       this._data.applyAction(...arguments);
     }
   }
