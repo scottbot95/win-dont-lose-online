@@ -17,6 +17,7 @@ const Player = props => {
           spread
           raise={props.me}
         />
+        <CardList cards={props.player.keepers} />
       </div>
     </div>
   );
