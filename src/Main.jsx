@@ -13,13 +13,12 @@ const Main = props => {
       break;
     case GameStateEnum.PLAYING:
     default:
-      page = <GameBoard players={props.players} />;
+      page = <GameBoard />;
   }
   return <div>{page}</div>;
 };
 
 const mapStateToProps = state => ({
-  players: state.players,
   gameState: state.status
 });
 

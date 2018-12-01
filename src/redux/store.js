@@ -24,7 +24,10 @@ export const addPlayer = player => {
   };
 };
 
-export const startGame = deck => ({ type: START_GAME, deck });
+export const startGame = deck => {
+  if (!Array.isArray(deck)) throw new Error('deck must be an array of cards');
+  return { type: START_GAME, deck };
+};
 
 export const drawCard = () => ({ type: DRAW_CARD });
 
@@ -103,13 +106,13 @@ const reducer = (state = initalState, action) => {
 };
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = createStore(
-//   reducer,
-//   // composeEnhancers(applyMiddleware(/*...*/))
-//   window &&
-//     window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//     window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  // composeEnhancers(applyMiddleware(/*...*/))
+  window &&
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+// const store = createStore(reducer);
 
 export default store;

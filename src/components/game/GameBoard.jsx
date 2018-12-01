@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { testDeck } from '../../../tests/testData';
 import GameBoardPresentational from './GameBoardPresentational';
 
-export default class GameBoard extends React.Component {
+class GameBoard extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -13,9 +13,17 @@ export default class GameBoard extends React.Component {
     return (
       <GameBoardPresentational
         players={this.props.players}
-        drawPile={testDeck}
-        discardPile={testDeck}
+        drawPile={this.props.drawPile}
+        discardPile={this.props.discardPile}
       />
     );
   }
 }
+
+const mapStateToProps = state => ({
+  players: state.players,
+  drawPile: state.drawPile,
+  discardPile: state.discardPile
+});
+
+export default connect(mapStateToProps)(GameBoard);

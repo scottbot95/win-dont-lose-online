@@ -6,7 +6,7 @@ import CirclePlacer from '../CirclePlacer';
 const CardList = props => {
   const cards = props.cards.map(card => (
     <Card
-      key={card.id}
+      key={card.title}
       card={card}
       selectCard={props.selectCard}
       faceDown={props.faceDown}
