@@ -3,7 +3,9 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { reducers } from './actions';
 import initialState from './initialState';
 
-const reducer = (state = initialState, action) => {
+export { initialState };
+
+export const reducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     // Global reducers here
