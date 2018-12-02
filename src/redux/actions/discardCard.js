@@ -5,7 +5,7 @@ export const discardCard = card => ({ type: DISCARD_CARD, card });
 export const reducer = (state, action) => {
   switch (action.type) {
     case DISCARD_CARD:
-      return { ...state, players: [...state.players, action.player] };
+      throw new Error('Not implemented');
     default:
       return state;
   }
