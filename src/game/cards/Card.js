@@ -2,9 +2,6 @@ let nextId = 0;
 
 export default class Card {
   constructor(options) {
-    // if (this.constructor === Card) {
-    //   throw new Error('Cannot insaniate `Card` class');
-    // }
     const defs = {
       title: 'Title',
       description: 'Insert filler text here',
@@ -14,6 +11,18 @@ export default class Card {
 
     this._data = Object.assign({}, defs, options);
     this._id = nextId++;
+
+    if (options === undefined) {
+      console.warn('Creating card with default values');
+      return;
+    }
+
+    if (options.title === undefined)
+      console.warn('Creating card with default title');
+    if (options.description === undefined)
+      console.warn('Creating card with default description');
+    if (options.flavor === undefined)
+      console.warn('Creating card with default flavor');
   }
 
   get id() {

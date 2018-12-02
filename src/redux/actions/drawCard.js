@@ -8,8 +8,8 @@ export const reducer = (state, action) => {
     case DRAW_CARD:
       if (state.status !== GameStateEnum.PLAYING)
         throw new Error('drawCard can only be used during a game');
-      let topCard = state.drawPile[state.drawPile.length - 1];
-      let drawPile = state.drawPile.slice(1, -1);
+      let topCard = state.drawPile[0];
+      let drawPile = state.drawPile.slice(1);
       let activePlayer = state.players.find(p => p.name === state.turn);
       let discardPile = state.discardPile;
       let players = [

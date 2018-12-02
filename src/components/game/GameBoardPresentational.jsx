@@ -17,7 +17,12 @@ const GameBoardPresentational = props => {
           <Player key={player.id} player={player} me={i === 0} />
         ))}
       </CirclePlacer>
-      <CardPile id="drawPile" faceDown cards={props.drawPile} />
+      <CardPile
+        selectCard={props.drawCard}
+        id="drawPile"
+        faceDown
+        cards={props.drawPile}
+      />
       <CardPile id="discardPile" cards={props.discardPile} />
     </div>
   );

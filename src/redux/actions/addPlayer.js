@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { ADD_PLAYER, RESET } from '../types';
 
-export const PlayerStatus = { PLAYING: 0, WON: 1, LOST: 2 };
+export const PlayerStatus = { PLAYING: 'PLAYING', WON: 'WON', LOST: 'LOST' };
 
 export const addPlayer = name => {
   return {

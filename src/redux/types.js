@@ -8,5 +8,9 @@ export const END_TURN = 'END_TURN';
 export const END_GAME = 'END_GAME';
 export const RESET = 'RESET';
 
-export const GameStateEnum = { PENDING: 1, PLAYING: 2, POSTGAME: 3 };
+export const GameStateEnum = {
+  PENDING: 'PENDING',
+  PLAYING: 'PLAYING',
+  POSTGAME: 'POSTGAME'
+};
 Object.freeze(GameStateEnum);

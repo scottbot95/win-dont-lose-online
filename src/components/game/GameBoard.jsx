@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import GameBoardPresentational from './GameBoardPresentational';
+import { drawCard } from '../../redux/actions';
 
 class GameBoard extends React.Component {
   constructor() {
@@ -15,6 +16,7 @@ class GameBoard extends React.Component {
         players={this.props.players}
         drawPile={this.props.drawPile}
         discardPile={this.props.discardPile}
+        drawCard={this.props.drawCard}
       />
     );
   }
@@ -26,4 +28,11 @@ const mapStateToProps = state => ({
   discardPile: state.discardPile
 });
 
-export default connect(mapStateToProps)(GameBoard);
+const mapDispatchToProps = dispatch => ({
+  drawCard: () => dispatch(drawCard())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameBoard);

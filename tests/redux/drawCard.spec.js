@@ -7,7 +7,7 @@ import { basicCards } from '../../src/game/cards';
 import { PlayerStatus } from '../../src/redux/actions/addPlayer';
 
 const drawAction = { type: DRAW_CARD };
-describe('drawCard', () => {
+describe.only('drawCard', () => {
   describe('action creator', () => {
     it('creates an action to draw a card', () => {
       expect(drawCard()).to.deep.equal(drawAction);
@@ -51,14 +51,12 @@ describe('drawCard', () => {
 
     it('adds the top card to the active player', () => {
       const state = reducer(fullDeck, drawAction);
-      expect(state.players[0].hand).to.contain(
-        basicCards[basicCards.length - 1]
-      );
+      expect(state.players[0].hand).to.contain(basicCards[0]);
     });
 
     it('removes the top card from the drawPile', () => {
       const state = reducer(fullDeck, drawAction);
-      expect(state.drawPile).to.not.contain(basicCards[basicCards.length - 1]);
+      expect(state.drawPile).to.not.contain(basicCards[0]);
     });
 
     it('shuffles the `discardPile` and moves it to `drawPile` when out of cards', () => {
