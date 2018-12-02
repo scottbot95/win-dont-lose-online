@@ -10,8 +10,7 @@ export const reducer = (state, action) => {
       );
       let nextIdx;
       if (state.turnReversed) {
-        nextIdx =
-          playerIdx !== 0 ? playerIdx - 1 : startGame.players.length - 1;
+        nextIdx = playerIdx !== 0 ? playerIdx - 1 : state.players.length - 1;
       } else {
         nextIdx = (playerIdx + 1) % state.players.length;
       }

@@ -7,7 +7,7 @@ import { basicCards } from '../../src/game/cards';
 import { PlayerStatus } from '../../src/redux/actions/addPlayer';
 
 const drawAction = { type: DRAW_CARD };
-describe.only('drawCard', () => {
+describe('drawCard', () => {
   describe('action creator', () => {
     it('creates an action to draw a card', () => {
       expect(drawCard()).to.deep.equal(drawAction);
