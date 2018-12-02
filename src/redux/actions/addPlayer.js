@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { ADD_PLAYER } from '../types';
+import { ADD_PLAYER, RESET } from '../types';
 
 export const PlayerStatus = { PLAYING: 0, WON: 1, LOST: 2 };
 
@@ -23,6 +23,9 @@ export const reducer = (state, action) => {
         id: nextId++
       };
       return { ...state, players: [...state.players, player] };
+    case RESET:
+      nextId = 0;
+      return state;
     default:
       return state;
   }

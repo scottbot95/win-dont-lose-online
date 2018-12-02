@@ -11,7 +11,7 @@ const PlayerInput = props => {
       <PlayerForm />
       <ul>
         {props.players.map(player => (
-          <li key={player.name}>{player.name}</li>
+          <li key={player.id}>{player.name}</li>
         ))}
       </ul>
       <button type="button" onClick={props.startGame}>

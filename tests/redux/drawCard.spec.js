@@ -7,7 +7,7 @@ import { basicCards } from '../../src/game/cards';
 import { PlayerStatus } from '../../src/redux/actions/addPlayer';
 
 const drawAction = { type: DRAW_CARD };
-describe.only('drawCard', () => {
+describe('drawCard', () => {
   describe('action creator', () => {
     it('creates an action to draw a card', () => {
       expect(drawCard()).to.deep.equal(drawAction);
@@ -19,9 +19,16 @@ describe.only('drawCard', () => {
       name: 'p1',
       hand: [],
       keepers: [],
-      status: PlayerStatus.PLAYING
+      status: PlayerStatus.PLAYING,
+      id: 0
     };
-    const testPlayer2 = { ...testPlayer1, name: 'p2', hand: [], keepers: [] };
+    const testPlayer2 = {
+      ...testPlayer1,
+      name: 'p2',
+      hand: [],
+      keepers: [],
+      id: 1
+    };
     const players = [testPlayer1, testPlayer2];
     let fullDeck = {
       ...initialState,
@@ -42,7 +49,7 @@ describe.only('drawCard', () => {
       expect(bad).to.throw();
     });
 
-    it('adds a card to the active player', () => {
+    it('adds the top card to the active player', () => {
       const state = reducer(fullDeck, drawAction);
       expect(state.players[0].hand).to.contain(
         basicCards[basicCards.length - 1]
@@ -54,11 +61,10 @@ describe.only('drawCard', () => {
       expect(state.drawPile).to.not.contain(basicCards[basicCards.length - 1]);
     });
 
-    xit('shuffles the `discardPile` and moves it to `drawPile` when out of cards', () => {
+    it('shuffles the `discardPile` and moves it to `drawPile` when out of cards', () => {
       const state = reducer(lowDeck, drawAction);
-      expect(state.drawPile).to.have.property('length', basicCards.length);
+      expect(state.drawPile).to.have.property('length', basicCards.length - 1);
       expect(state.discardPile).to.have.property('length', 0);
-      // TODO test for shuffling
     });
   });
 });

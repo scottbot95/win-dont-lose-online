@@ -10,7 +10,7 @@ const CardPile = props => {
           const pos = props.cards.length - 1 - idx;
           return (
             <Card
-              key={card.title}
+              key={card.id}
               selectCard={idx === 0 && props.selectCard}
               card={card}
               style={{

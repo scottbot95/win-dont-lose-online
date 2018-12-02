@@ -6,7 +6,7 @@ import {
   addPlayer,
   PlayerStatus
 } from '../../src/redux/actions/addPlayer';
-import { ADD_PLAYER } from '../../src/redux/types';
+import { ADD_PLAYER, RESET } from '../../src/redux/types';
 import initialState from '../../src/redux/initialState';
 
 describe('addPlayer', () => {
@@ -23,6 +23,10 @@ describe('addPlayer', () => {
   });
 
   describe('reducer', () => {
+    beforeEach('reset id counter', () => {
+      reducer({}, { type: RESET });
+    });
+
     it('only handles its own action type', () => {
       expect(reducer(initialState, {})).to.equal(initialState);
     });

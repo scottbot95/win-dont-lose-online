@@ -24,41 +24,10 @@ describe('Redux store', () => {
 
   describe('Dispatching', () => {
     describe('Playing actions', () => {
-      let players;
-
       beforeEach('setup game state', () => {
         const playerNames = ['p1', 'p2', 'p3', 'p4'];
         playerNames.forEach(p => dispatch(addPlayer(p)));
         dispatch(startGame(basicCards));
-      });
-
-      describe('drawCard', () => {
-        let topCard;
-        beforeEach('find top card', () => {
-          const state = store.getState();
-          const drawPile = state.drawPile;
-          topCard = drawPile[drawPile.length - 1];
-        });
-
-        it('adds a card to the active players hand', () => {
-          dispatch(drawCard());
-          const state = store.getState();
-          const activePlayer = state.players.find(p => p.name === state.turn);
-          expect(activePlayer.hand).to.contain(topCard);
-        });
-
-        it('removes the top card from the `drawPile`', () => {
-          dispatch(drawCard());
-          expect(store.getState().drawPile).to.not.contain(topCard);
-        });
-
-        xit('shuffles the `discardPile` and set it as the `drawPile` when `drawPile` runs out', () => {
-          // empty out the draw pile
-
-          while (store.getState().drawPile.length > 1) {
-            dispatch(drawCard());
-          }
-        });
       });
 
       describe('playCard', () => {
