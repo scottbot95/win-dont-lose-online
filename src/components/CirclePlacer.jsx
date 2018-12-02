@@ -13,7 +13,6 @@ export default class CirclePlacer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mount');
     this.updatePadding();
     this._loadFromProps();
   }
@@ -35,6 +34,7 @@ export default class CirclePlacer extends React.Component {
   }
 
   updatePadding() {
+    // FIXME this whole function is evil and shouldn't even exist
     const node = ReactDOM.findDOMNode(this);
     let sumWidth = 0;
     let sumHeight = 0;

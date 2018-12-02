@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { GameBoard } from './components';
 import PlayerInput from './components/PlayerInput';
-import { GameStateEnum } from './redux/store';
+import { GameStateEnum } from './redux/types';
 
 const Main = props => {
   let page;

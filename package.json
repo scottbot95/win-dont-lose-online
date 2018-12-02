@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=development",
+    "build-watch": "webpack --mode=development --watch",
     "test": "mocha ./tests/*.spec.js ./tests/**/*.spec.js --watch --compilers js:babel-core/register --compilers jsx:babel-core/register"
   },
   "author": "",

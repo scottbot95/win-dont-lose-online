@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPlayer } from '../redux/store';
+import { addPlayer } from '../redux/actions';
 import { Player } from '../game';
 
 class PlayerForm extends React.Component {

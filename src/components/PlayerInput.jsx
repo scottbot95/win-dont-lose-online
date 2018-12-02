@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PlayerForm from './PlayerForm';
-import { startGame } from '../redux/store';
+import { startGame } from '../redux/actions';
 import { basicCards } from '../game/cards';
 
 const PlayerInput = props => {
