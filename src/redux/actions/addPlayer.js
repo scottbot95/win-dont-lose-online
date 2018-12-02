@@ -15,6 +15,8 @@ let nextId = 0;
 export const reducer = (state, action) => {
   switch (action.type) {
     case ADD_PLAYER:
+      if (state.players.find(p => p.name === action.name))
+        throw new Error('Cannot have duplicate player names');
       const player = {
         name: action.name,
         hand: [],

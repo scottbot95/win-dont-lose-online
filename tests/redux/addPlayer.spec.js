@@ -58,5 +58,20 @@ describe('addPlayer', () => {
         reducer(stateBefore, { type: ADD_PLAYER, name: name2 })
       ).to.deep.equal({ ...initialState, players: [p1, p2] });
     });
+
+    it('disallows duplicate player names', () => {
+      const name = 'Player 1';
+      const p1 = {
+        name,
+        hand: [],
+        keepers: [],
+        status: PlayerStatus.PLAYING,
+        id: 0
+      };
+      const stateBefore = deepFreeze({ ...initialState, players: [p1] });
+
+      const bad = () => reducer(stateBefore, { type: ADD_PLAYER, name });
+      expect(bad).to.throw();
+    });
   });
 });

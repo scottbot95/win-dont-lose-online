@@ -18,7 +18,11 @@ describe('endTurn', () => {
     describe('counter-clockwise play', () => {
       const startState = {
         ...initialState,
-        players: [{ name: 'p1' }, { name: 'p2' }, { name: 'p3' }],
+        players: [
+          { name: 'p1', id: 0 },
+          { name: 'p2', id: 1 },
+          { name: 'p3', id: 2 }
+        ],
         turn: 'p1'
       };
       const stateP2Turn = { ...startState, turn: 'p2' };
@@ -41,7 +45,11 @@ describe('endTurn', () => {
     describe('clockwise play', () => {
       const startState = {
         ...initialState,
-        players: [{ name: 'p1' }, { name: 'p2' }, { name: 'p3' }],
+        players: [
+          { name: 'p1', id: 0 },
+          { name: 'p2', id: 1 },
+          { name: 'p3', id: 2 }
+        ],
         turn: 'p1',
         turnReversed: true
       };

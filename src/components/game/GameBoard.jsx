@@ -2,12 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import GameBoardPresentational from './GameBoardPresentational';
-import { drawCard } from '../../redux/actions';
+import { drawCard, endTurn } from '../../redux/actions';
 
 class GameBoard extends React.Component {
   constructor() {
     super();
     this.state = {};
+  }
+
+  componentDidMount() {
+    let remainingCards = this.props.players.length * 3;
+    const interval = setInterval(() => {
+      this.props.drawCard();
+      this.props.endTurn();
+      if (--remainingCards === 0) clearInterval(interval);
+    }, 500);
   }
 
   render() {
@@ -29,7 +38,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  drawCard: () => dispatch(drawCard())
+  drawCard: () => dispatch(drawCard()),
+  endTurn: () => dispatch(endTurn())
 });
 
 export default connect(
