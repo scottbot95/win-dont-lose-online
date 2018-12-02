@@ -16,7 +16,7 @@ class PlayerForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPlayer(new Player(this.state.input));
+    this.props.addPlayer(this.state.input);
     this.setState({ input: '' });
   }
 

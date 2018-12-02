@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import { reducer, resetState } from '../../src/redux/actions/reset';
 import { RESET, GameStateEnum } from '../../src/redux/types';
 import initialState from '../../src/redux/initialState';
-import { Player } from '../../src/game';
 
 describe('resetState', () => {
   describe('action creator', () => {
@@ -13,8 +12,14 @@ describe('resetState', () => {
   });
 
   describe('reducer', () => {
+    const testPlayer = {
+      name: 'p1',
+      hand: [],
+      keepers: []
+    };
     const startState = {
-      players: [new Player('p1'), new Player('p2')],
+      ...initialState,
+      players: [testPlayer],
       status: GameStateEnum.PLAYING
     };
 

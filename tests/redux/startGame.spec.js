@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import { reducer, startGame } from '../../src/redux/actions/startGame';
 import { START_GAME, GameStateEnum } from '../../src/redux/types';
 import initialState from '../../src/redux/initialState';
-import { Player } from '../../src/game';
 import { basicCards } from '../../src/game/cards';
 
 describe('resetState', () => {
@@ -17,8 +16,16 @@ describe('resetState', () => {
   });
 
   describe('reducer', () => {
+    const testPlayer1 = {
+      name: 'p1',
+      hand: [],
+      keepers: []
+    };
+    const testPlayer2 = { ...testPlayer1, name: 'p2', hand: [], keepers: [] };
+    const players = [testPlayer1, testPlayer2];
     const startState = {
-      players: [new Player('p1'), new Player('p2')]
+      ...initialState,
+      players
     };
 
     it('throws an error if less than 2 player are in the game', () => {
@@ -28,7 +35,7 @@ describe('resetState', () => {
 
     it('sets the status, turn, and drawPile in state', () => {
       const endState = reducer(
-        { ...initialState, ...startState },
+        { ...startState },
         { type: START_GAME, deck: basicCards }
       );
 

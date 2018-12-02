@@ -1,25 +1,24 @@
 import { expect } from 'chai';
+import deepFreeze from 'deep-freeze';
 
-import { reducer, addPlayer } from '../../src/redux/actions/addPlayer';
-import { Player } from '../../src/game';
+import {
+  reducer,
+  addPlayer,
+  PlayerStatus
+} from '../../src/redux/actions/addPlayer';
 import { ADD_PLAYER } from '../../src/redux/types';
 import initialState from '../../src/redux/initialState';
 
 describe('addPlayer', () => {
   describe('action creator', () => {
-    it('only accepts instances of `Player`', () => {
-      const bad = () => addPlayer('banana');
-      expect(bad).to.throw();
-    });
-
     it('creates an action to add a player', () => {
-      const player = new Player('Player 1');
+      const name = 'Player 1';
       const expectedAction = {
         type: ADD_PLAYER,
-        player
+        name
       };
 
-      expect(addPlayer(player)).to.deep.equal(expectedAction);
+      expect(addPlayer(name)).to.deep.equal(expectedAction);
     });
   });
 
@@ -29,15 +28,31 @@ describe('addPlayer', () => {
     });
 
     it('adds a player to the list', () => {
-      const player = new Player('Player 1');
-      expect(
-        reducer({ players: [] }, { type: ADD_PLAYER, player })
-      ).to.deep.equal({ players: [player] });
+      const name = 'Player 1';
+      const p1 = {
+        name,
+        hand: [],
+        keepers: [],
+        status: PlayerStatus.PLAYING,
+        id: 0
+      };
+      expect(reducer(initialState, { type: ADD_PLAYER, name })).to.deep.equal({
+        ...initialState,
+        players: [p1]
+      });
 
-      const player2 = new Player('Player 2');
+      const stateBefore = deepFreeze({ ...initialState, players: [p1] });
+      const name2 = 'Player 2';
+      const p2 = {
+        name: name2,
+        hand: [],
+        keepers: [],
+        status: PlayerStatus.PLAYING,
+        id: 1
+      };
       expect(
-        reducer({ players: [player] }, { type: ADD_PLAYER, player: player2 })
-      ).to.deep.equal({ players: [player, player2] });
+        reducer(stateBefore, { type: ADD_PLAYER, name: name2 })
+      ).to.deep.equal({ ...initialState, players: [p1, p2] });
     });
   });
 });

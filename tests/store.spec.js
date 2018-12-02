@@ -28,8 +28,7 @@ describe('Redux store', () => {
 
       beforeEach('setup game state', () => {
         const playerNames = ['p1', 'p2', 'p3', 'p4'];
-        players = playerNames.map(p => new Player(p));
-        players.forEach(p => dispatch(addPlayer(p)));
+        playerNames.forEach(p => dispatch(addPlayer(p)));
         dispatch(startGame(basicCards));
       });
 

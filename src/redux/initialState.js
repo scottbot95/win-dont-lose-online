@@ -1,5 +1,7 @@
 import { GameStateEnum } from './types';
 
+import deepFreeze from 'deep-freeze';
+
 const initialState = {
   players: [],
   drawPile: [],
@@ -9,4 +11,4 @@ const initialState = {
   turnReversed: false
 };
 
-export default initialState;
+export default deepFreeze(initialState);
