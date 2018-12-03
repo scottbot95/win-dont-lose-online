@@ -1,6 +1,6 @@
 # Win Don't Lose Online
 
-[Redux](src/redux/README.md)
+[Redux](src/redux)
 
 ## Overview
 
