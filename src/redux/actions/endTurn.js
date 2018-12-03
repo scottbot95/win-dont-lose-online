@@ -12,7 +12,6 @@ export const reducer = (state, action) => {
       } else {
         nextIdx = (player.id + 1) % state.players.length;
       }
-      console.log(player, nextIdx);
       return {
         ...state,
         turn: state.players[nextIdx].name

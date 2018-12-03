@@ -7,7 +7,7 @@ import { PLAY_CARD } from '../../src/redux/types';
 import { initialState } from '../../src/redux';
 import { basicCards } from '../../src/game/cards';
 
-describe.only('playCard', () => {
+describe('playCard', () => {
   describe('action creator', () => {
     it('creates an action to play a card on a player', () => {
       const expectedAction = {
@@ -48,11 +48,13 @@ describe.only('playCard', () => {
     });
 
     it("removes the played card from the player's hand", () => {
-      const stateAfter = reducer(
+      const stateAfterNormal = reducer(
         stateBefore,
         playCard(normalCard, stateBefore.players[1])
       );
-      expect(stateAfter.players[1].hand).to.not.contain(normalCard);
+      const stateAfterKeeper = reducer(stateBefore, playCard(keeperCard));
+      expect(stateAfterNormal.players[1].hand).to.not.contain(normalCard);
+      expect(stateAfterKeeper.players[1].hand).to.not.contain(keeperCard);
     });
 
     it("adds the card to the discard if it isn't a keeper", () => {

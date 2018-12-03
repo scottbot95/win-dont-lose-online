@@ -16,8 +16,8 @@ export const reducer = (state, action) => {
       const card = activePlayer.hand[cardIdx];
       if (cardIdx === -1) throw new Error('Card not active players hand');
       const newHand = [
-        activePlayer.hand.slice(0, cardIdx),
-        activePlayer.hand.slice(cardIdx + 1)
+        ...activePlayer.hand.slice(0, cardIdx),
+        ...activePlayer.hand.slice(cardIdx + 1)
       ];
       state = {
         ...state,
@@ -29,9 +29,9 @@ export const reducer = (state, action) => {
       };
 
       if (card instanceof Keeper) {
-        const targetPlayer =
-          state.players.find(p => p.id === action.targetPlayerId) ||
-          activePlayer;
+        const targetPlayer = state.players.find(
+          p => p.id === action.targetPlayerId
+        ) || { ...activePlayer, hand: newHand };
         const keepers = [...targetPlayer.keepers, card];
         return {
           ...state,
@@ -44,7 +44,7 @@ export const reducer = (state, action) => {
       } else {
         return {
           ...state,
-          discardPile: [...state.discardPile, card]
+          discardPile: [card, ...state.discardPile]
         };
       }
     default:

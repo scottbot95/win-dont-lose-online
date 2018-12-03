@@ -14,7 +14,12 @@ const GameBoardPresentational = props => {
         passTheta="rotate"
       >
         {props.players.map((player, i) => (
-          <Player key={player.id} player={player} me={i === 0} />
+          <Player
+            key={player.id}
+            player={player}
+            playCard={i === 0 && props.playCard}
+            me={i === 0}
+          />
         ))}
       </CirclePlacer>
       <CardPile
