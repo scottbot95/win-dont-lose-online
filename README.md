@@ -1,5 +1,7 @@
 # Win Don't Lose Online
 
+[Redux](src/redux/README.md)
+
 ## Overview
 
 This project is an online recreation of the fantastic card game
