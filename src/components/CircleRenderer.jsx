@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const degToRad = deg => (deg * Math.PI) / 180;
 
@@ -24,6 +25,10 @@ const calcStyle = (props, theta) => {
   };
 };
 
+/**
+ * Presentaional component to display items
+ * placed in a circle based on the props provided
+ */
 const CircleRenderer = props => {
   const style = {
     width: props.radiusX * 2,
@@ -59,6 +64,8 @@ const CircleRenderer = props => {
     </div>
   );
 };
+
+CircleRenderer.propTypes = {};
 
 CircleRenderer.defaultProps = {
   drawCircles: false
