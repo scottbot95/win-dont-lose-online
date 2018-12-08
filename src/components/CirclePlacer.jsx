@@ -1,6 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
 import CircleRenderer from './CircleRenderer';
 
 export default class CirclePlacer extends React.Component {
@@ -117,6 +119,27 @@ export default class CirclePlacer extends React.Component {
     return renderer;
   }
 }
+
+CirclePlacer.propTypes = {
+  /** The angle between adjacent elements on the circle (measured in degrees)  */
+  alpha: PropTypes.number,
+  /** Default radius to use if the radius in either direction isn't specified */
+  radius: PropTypes.oneOfType([PropTypes.number, PropTypes.exact('auto')]),
+  /** Radius of the cirle in the X axis */
+  radiusX: PropTypes.number,
+  /** Radius of the cirle in the Y axis */
+  radiusY: PropTypes.number,
+  /** Ratio of the way through the items to center around */
+  center: PropTypes.number,
+  /** The starting angle to place the 'center' at (measured in degrees) */
+  startAngle: PropTypes.number,
+  /** Whether or not to draw circles represending the circle's radius and outside padding  */
+  drawCircle: PropTypes.bool,
+  /** Rotatation after placement on circle */
+  rotate: PropTypes.oneOf(['none', 'tanget']),
+  /** If specified, pass the angle each element is as a prop given my `passTheta` */
+  passTheta: PropTypes.string
+};
 
 CirclePlacer.defaultProps = {
   startAngle: 90

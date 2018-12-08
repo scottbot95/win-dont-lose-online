@@ -35,37 +35,6 @@ This project is currently implemented to use the webpack-dev-server. To start th
 
 These components directly handle rendering and interating with the cards themselves.
 
-### Card
-
-A component represneting a single card
-
-| Prop Name  | Type     | Description                                  |
-| ---------- | -------- | -------------------------------------------- |
-| card       | object   | An object containing the data about the card |
-| selectCard | function | Callback to be called when a card is clicked |
-
-### CardList
-
-A component representing a collection of cards. A `CardList` can either display the cards in a line, or can overlay them on top of each other.
-
-| Prop Name  | Type     | Description                                                           |
-| ---------- | -------- | --------------------------------------------------------------------- |
-| cards      | object[] | An array of card data to display to the user                          |
-| selectCard | function | A callback to be called with the selected card when a card is clicked |
-| spread     | boolean  | Whether or not to display the cards in a fanned out pattern           |
-| faceDown   | boolean  | A flag dictating whether the cards should be displayed face down      |
-
-### CardPile
-
-**This may be merged into the [CardList](#CardList) in the future**
-
-A component representing a pile of cards in a stack. Will only allow card selection form top of the pile
-
-| Prop Name  | Type     | Description                                                                 |
-| ---------- | -------- | --------------------------------------------------------------------------- |
-| cards      | object[] | An array of card data to display to the user                                |
-| selectCard | function | A callback to be called with the selected card when the top card is clicked |
-| faceDown   | boolean  | A flag dictating whether the cards should be displayed face down            |
 
 ## Game Board Components
 

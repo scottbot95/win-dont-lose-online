@@ -1,5 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import CardData from '../../game/cards/Card';
 
+/**
+ * A presentational component to render information about a provided card
+ */
 const Card = props => {
   const style = { ...props.style };
   const click = () => {
@@ -36,6 +41,24 @@ const Card = props => {
       )}
     </div>
   );
+};
+
+Card.propTypes = {
+  /** optional styling to be passed on to card element */
+  style: PropTypes.object,
+  /** Optional Callback function to be called when the card is clicked.  */
+  selectCard: PropTypes.func,
+  /** The card data to render */
+  card: PropTypes.instanceOf(CardData).isRequired,
+  /** An optional seperate scale property */
+  scale: PropTypes.number,
+  /** When true, render back of card and don't even put data into DOM */
+  faceDown: PropTypes.bool
+};
+
+Card.defaultProps = {
+  faceDown: false,
+  style: {}
 };
 
 export default Card;

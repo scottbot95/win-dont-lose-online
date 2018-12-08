@@ -65,10 +65,34 @@ const CircleRenderer = props => {
   );
 };
 
-CircleRenderer.propTypes = {};
+CircleRenderer.propTypes = {
+  /** Radius of the cirle in the X axis */
+  radiusX: PropTypes.number,
+  /** Radius of the cirle in the Y axis */
+  radiusY: PropTypes.number,
+  /** Padding of the container itself. */
+  padding: PropTypes.string,
+  /** Whether or not to draw circles represending the circle's radius and outside padding  */
+  drawCircles: PropTypes.bool,
+  /** The starting angle to place the 'center' at (measured in degrees) */
+  startAngle: PropTypes.number,
+  /** The angle between adjacent elements on the circle (measured in degrees)  */
+  alpha: PropTypes.number,
+  /** Rotatation after placement on circle */
+  rotate: PropTypes.oneOf(['none', 'tangent']),
+  /** If specified, pass the angle each element is as a prop given my `passTheta` */
+  passTheta: PropTypes.string
+};
 
 CircleRenderer.defaultProps = {
-  drawCircles: false
+  drawCircles: false,
+  padding: '0px',
+  radiusX: 100,
+  radiusY: 100,
+  startAngle: 90,
+  alpha: 0,
+  rotate: 'none',
+  passTheta: undefined
 };
 
 export default CircleRenderer;

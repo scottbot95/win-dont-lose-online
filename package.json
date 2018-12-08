@@ -7,7 +7,9 @@
     "start-lan": "webpack-dev-server --mode=development --host 0.0.0.0",
     "build": "webpack --mode=development",
     "build-watch": "webpack --mode=development --watch",
-    "test": "mocha ./tests/*.spec.js ./tests/**/*.spec.js --watch --compilers js:babel-core/register --compilers jsx:babel-core/register"
+    "test": "mocha ./tests/*.spec.js ./tests/**/*.spec.js --watch --compilers js:babel-core/register --compilers jsx:babel-core/register",
+    "docs-build": "styleguidist build",
+    "docs-server": "styleguidist server"
   },
   "author": "",
   "license": "ISC",
