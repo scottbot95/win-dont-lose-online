@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Win Don't Lose Online",
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
-    "start-lan": "webpack-dev-server --mode=development --host 0.0.0.0",
-    "build": "webpack --mode=development",
-    "build-watch": "webpack --mode=development --watch",
+    "start": "npm run start:dev",
+    "start:dev": "NODE_ENV=development npm run build:watch & NODE_ENV=devolopment npm run start:server",
+    "start:server": "nodemon -w server server/start.js",
+    "start:old": "webpack-dev-server",
+    "start-lan:old": "webpack-dev-server --host 0.0.0.0",
+    "build": "webpack",
+    "build:watch": "webpack --watch",
     "test": "mocha ./tests/*.spec.js ./tests/**/*.spec.js --watch --compilers js:babel-core/register --compilers jsx:babel-core/register",
     "docs-build": "styleguidist build",
     "docs-server": "styleguidist server"
@@ -19,7 +22,10 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "volleyball": "^1.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
