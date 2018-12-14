@@ -8,6 +8,37 @@ const GameStatus = {
 };
 Object.freeze(GameStatus);
 
+const forEachEvtHandler = (handlers, func) => {
+  const events = Object.keys(handlers);
+  for (const evt of events) {
+    const handlerOrArray = handlers[evt];
+    if (Array.isArray(handlerOrArray)) {
+      for (const handler of handlerOrArray) {
+        func(evt, handler);
+      }
+    } else if (handlerOrArray) {
+      func(evt, handlerOrArray);
+    }
+  }
+};
+
+const clearAllHandlers = (emitters, handlers) => {
+  const clearAll = (evt, handler) => emtr => emtr.off(evt, handler);
+  forEachEvtHandler(handlers, (evt, handler) =>
+    emitters.forEach(clearAll(evt, handler))
+  );
+};
+
+const registerAllHandlers = (emitter, handlers) => {
+  forEachEvtHandler(handlers, (evt, handler) => emitter.on(evt, handler));
+};
+
+const registerHandleToAll = (emitters, event, handler) => {
+  emitters.forEach(emtr => {
+    emtr.on(event, handler);
+  });
+};
+
 class Game {
   constructor() {
     this.players = [];
@@ -16,15 +47,32 @@ class Game {
     this.activePlayer = 0;
     this.gameStatus = GameStatus.PENDING;
     this._emitters = [];
+    this._handlers = {};
   }
 
   _emitAll(event, ...data) {
     this._emitters.forEach(emt => emt.emit(event, ...data));
   }
 
-  _registerHandlers(emitter) {}
+  _onAll(event, handler) {
+    // record handler for future emitters
+    if (Array.isArray(this._handlers[event])) {
+      this._handlers[event].push(handler);
+    } else if (this._handlers[event]) {
+      this._handlers[event] = [this._handlers[event], handler];
+    }
 
-  _unregisterHandlers(emitter) {}
+    // add handler to existing emitters
+    registerHandleToAll(this._emitters, event, handler);
+  }
+
+  _registerHandlers(emitter) {
+    registerAllHandlers(emitter, this._handlers);
+  }
+
+  _unregisterHandlers(emitter) {
+    clearAllHandlers(emitter, this._handlers);
+  }
 
   addEmitter(emitter) {
     this._emitters.push(emitter);
@@ -43,6 +91,7 @@ class Game {
 
   addPlayer(name) {
     const newPlayer = new Player(name);
+    if (this.players.length === 0) newPlayer.isVIP = true;
     this.players.push(newPlayer);
   }
 

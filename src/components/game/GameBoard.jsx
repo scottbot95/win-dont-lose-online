@@ -13,12 +13,12 @@ class GameBoard extends React.Component {
   }
 
   componentDidMount() {
-    let remainingCards = this.props.players.length * 3;
-    const interval = setInterval(() => {
-      this.props.drawCard();
-      this.props.endTurn();
-      if (--remainingCards === 0) clearInterval(interval);
-    }, 500);
+    // let remainingCards = this.props.players.length * 3;
+    // const interval = setInterval(() => {
+    //   this.props.drawCard();
+    //   this.props.endTurn();
+    //   if (--remainingCards === 0) clearInterval(interval);
+    // }, 500);
   }
 
   playCard(card) {
