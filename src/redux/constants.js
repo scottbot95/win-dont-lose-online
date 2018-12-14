@@ -1,4 +1,3 @@
-export const ADD_PLAYER = 'ADD_PLAYER';
 export const START_GAME = 'START_GAME';
 export const DRAW_CARD = 'DRAW_CARD';
 export const PLAY_CARD = 'PLAY_CARD';
