@@ -1,4 +1,4 @@
-import { END_TURN } from '../types';
+import { END_TURN } from '../constants';
 
 export const endTurn = () => ({ type: END_TURN });
 

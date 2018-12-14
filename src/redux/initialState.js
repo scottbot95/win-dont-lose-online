@@ -1,4 +1,4 @@
-import { GameStateEnum } from './types';
+import { GameStateEnum } from './constants';
 
 import deepFreeze from 'deep-freeze';
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { PLAY_CARD } from '../types';
+import { PLAY_CARD } from '../constants';
 import { Keeper } from '../../game/cards';
 
 export const playCard = (card, target) => ({

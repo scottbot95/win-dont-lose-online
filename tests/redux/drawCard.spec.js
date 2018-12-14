@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { reducer, drawCard } from '../../src/redux/actions/drawCard';
-import { DRAW_CARD, GameStateEnum } from '../../src/redux/types';
+import { DRAW_CARD, GameStateEnum } from '../../src/redux/constants';
 import { initialState } from '../../src/redux';
 import { basicCards } from '../../src/game/cards';
 import { PlayerStatus } from '../../src/redux/actions/addPlayer';

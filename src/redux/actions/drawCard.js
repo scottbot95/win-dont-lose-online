@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { DRAW_CARD, GameStateEnum } from '../types';
+import { DRAW_CARD, GameStateEnum } from '../constants';
 
 export const drawCard = () => ({ type: DRAW_CARD });
 

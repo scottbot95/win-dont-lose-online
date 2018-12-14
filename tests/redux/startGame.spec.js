@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { reducer, startGame } from '../../src/redux/actions/startGame';
-import { START_GAME, GameStateEnum } from '../../src/redux/types';
+import { START_GAME, GameStateEnum } from '../../src/redux/constants';
 import initialState from '../../src/redux/initialState';
 import { basicCards } from '../../src/game/cards';
 

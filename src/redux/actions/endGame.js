@@ -1,4 +1,4 @@
-import { END_GAME, GameStateEnum } from '../types';
+import { END_GAME, GameStateEnum } from '../constants';
 
 export const endGame = () => ({ type: END_GAME });
 

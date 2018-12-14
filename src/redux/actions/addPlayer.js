@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { ADD_PLAYER, RESET } from '../types';
+import { ADD_PLAYER, RESET } from '../constants';
 
 export const PlayerStatus = { PLAYING: 'PLAYING', WON: 'WON', LOST: 'LOST' };
 

@@ -1,4 +1,4 @@
-import { DISCARD_CARD } from '../types';
+import { DISCARD_CARD } from '../constants';
 
 export const discardCard = card => ({ type: DISCARD_CARD, card });
 

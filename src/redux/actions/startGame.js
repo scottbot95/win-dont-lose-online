@@ -1,4 +1,4 @@
-import { START_GAME, GameStateEnum } from '../types';
+import { START_GAME, GameStateEnum } from '../constants';
 
 export const startGame = deck => {
   if (!Array.isArray(deck)) throw new Error('deck must be an array of cards');

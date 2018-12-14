@@ -1,4 +1,4 @@
-import { RESET } from '../types';
+import { RESET } from '../constants';
 import initialState from '../initialState';
 
 export const resetState = () => ({ type: RESET });

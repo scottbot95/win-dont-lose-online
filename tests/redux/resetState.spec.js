@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { reducer, resetState } from '../../src/redux/actions/reset';
-import { RESET, GameStateEnum } from '../../src/redux/types';
+import { RESET, GameStateEnum } from '../../src/redux/constants';
 import initialState from '../../src/redux/initialState';
 
 describe('resetState', () => {

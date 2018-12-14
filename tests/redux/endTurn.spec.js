@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
 import { reducer, endTurn } from '../../src/redux/actions/endTurn';
-import { END_TURN } from '../../src/redux/types';
+import { END_TURN } from '../../src/redux/constants';
 import { initialState } from '../../src/redux';
 
 describe('endTurn', () => {

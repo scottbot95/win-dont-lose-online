@@ -6,7 +6,7 @@ import {
   addPlayer,
   PlayerStatus
 } from '../../src/redux/actions/addPlayer';
-import { ADD_PLAYER, RESET } from '../../src/redux/types';
+import { ADD_PLAYER, RESET } from '../../src/redux/constants';
 import initialState from '../../src/redux/initialState';
 
 describe('addPlayer', () => {

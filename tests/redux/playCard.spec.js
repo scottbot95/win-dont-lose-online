@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
 import { reducer, playCard } from '../../src/redux/actions/playCard';
-import { PLAY_CARD } from '../../src/redux/types';
+import { PLAY_CARD } from '../../src/redux/constants';
 import { initialState } from '../../src/redux';
 import { basicCards } from '../../src/game/cards';
 

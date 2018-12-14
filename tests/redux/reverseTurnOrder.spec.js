@@ -4,7 +4,7 @@ import {
   reducer,
   reverseTurnOrder
 } from '../../src/redux/actions/reverseTurnOrder';
-import { REVERSE_TURN_ORDER } from '../../src/redux/types';
+import { REVERSE_TURN_ORDER } from '../../src/redux/constants';
 
 describe('reverseTurnOrder', () => {
   describe('action creator', () => {

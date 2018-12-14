@@ -1,4 +1,4 @@
-import { REVERSE_TURN_ORDER } from '../types';
+import { REVERSE_TURN_ORDER } from '../constants';
 
 export const reverseTurnOrder = () => ({ type: REVERSE_TURN_ORDER });
 

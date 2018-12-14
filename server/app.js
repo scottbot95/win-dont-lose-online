@@ -13,6 +13,9 @@ if (process.env.NODE_ENV.toLocaleLowerCase() === 'production') {
   console.log('STARTING IN DEVELOPMENT MODE');
 }
 
+// session middleware
+app.use(require('./session'));
+
 // static middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
