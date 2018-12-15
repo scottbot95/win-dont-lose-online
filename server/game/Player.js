@@ -5,7 +5,7 @@ const PlayerFlags = {
 };
 Object.freeze(PlayerFlags);
 
-let nextId = 0;
+let nextId = 1;
 
 class Player {
   constructor(name) {
@@ -14,13 +14,7 @@ class Player {
     this.keepers = [];
     this.score = 0;
     this.flags = 0;
-
-    const id = nextId++;
-
-    Object.defineProperty(this, 'id', {
-      value: id,
-      writable: false
-    });
+    this.id = nextId++;
   }
 }
 

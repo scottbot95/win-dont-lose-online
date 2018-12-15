@@ -1,2 +1,2 @@
-const initialState = [];
+const initialState = {};
 export default initialState;

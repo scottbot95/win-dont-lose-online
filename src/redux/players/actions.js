@@ -1,8 +1,8 @@
 import { ADD_PLAYER, ADD_CARD_TO_HAND, ADD_KEEPER } from './constants';
 
-export const addPlayer = name => ({
+export const addPlayer = player => ({
   type: ADD_PLAYER,
-  name
+  player
 });
 
 export const addCardToHand = (playerId, card) => ({
@@ -16,8 +16,3 @@ export const addKeeper = (playerId, card) => ({
   card,
   playerId
 });
-
-export const findIndexById = (players, id) =>
-  players.findIndex(p => p.id === id);
-
-export const findPlayerById = (players, id) => players.find(p => p.id === id);
