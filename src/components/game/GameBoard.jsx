@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import GameBoardPresentational from './GameBoardPresentational';
-import { drawCard, endTurn, playCard } from '../../redux/actions';
 
 class GameBoard extends React.Component {
   constructor() {
@@ -19,14 +18,6 @@ class GameBoard extends React.Component {
     //   this.props.endTurn();
     //   if (--remainingCards === 0) clearInterval(interval);
     // }, 500);
-  }
-
-  playCard(card) {
-    console.log(card);
-    // TODO choose target player if keeper
-    // TODO run card action here
-    this.props.playCard(card);
-    this.props.endTurn();
   }
 
   render() {
@@ -48,11 +39,7 @@ const mapStateToProps = state => ({
   discardPile: state.discardPile
 });
 
-const mapDispatchToProps = dispatch => ({
-  drawCard: () => dispatch(drawCard()),
-  endTurn: () => dispatch(endTurn()),
-  playCard: (card, player) => dispatch(playCard(card, player))
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

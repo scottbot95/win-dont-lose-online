@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PlayerForm from './PlayerForm';
-import { startGame } from '../redux/actions';
 import { basicCards } from '../game/cards';
 
 const PlayerInput = props => {
@@ -14,9 +13,7 @@ const PlayerInput = props => {
           <li key={player.id}>{player.name}</li>
         ))}
       </ul>
-      <button type="button" onClick={props.startGame}>
-        Start Game
-      </button>
+      <button type="button">Start Game</button>
     </div>
   );
 };
@@ -25,9 +22,7 @@ const mapStateToProps = state => ({
   players: state.players
 });
 
-const mapDispatchToProps = dispatch => ({
-  startGame: () => dispatch(startGame(basicCards))
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

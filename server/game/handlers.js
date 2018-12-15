@@ -1,8 +1,6 @@
 module.exports = {
-  newPlayer: function(name, ack) {
-    console.log(arguments);
-    const player = this.addPlayer(name);
-    console.log(player);
-    typeof ack === 'function' && ack(player);
+  newPlayer: function(socket, name) {
+    const player = this.addPlayer(name, socket.request.session.id);
+    socket.emit('newPlayer', player);
   }
 };
