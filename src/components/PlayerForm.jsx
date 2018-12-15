@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Player } from '../game';
 
 class PlayerForm extends React.Component {
   constructor() {
@@ -16,6 +14,7 @@ class PlayerForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ input: '' });
+    this.props.submit(this.state.input);
   }
 
   handleChange(e) {
@@ -39,9 +38,4 @@ class PlayerForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(PlayerForm);
+export default PlayerForm;
