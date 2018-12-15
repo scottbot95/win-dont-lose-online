@@ -16,3 +16,8 @@ export const addKeeper = (playerId, card) => ({
   card,
   playerId
 });
+
+export const findIndexById = (players, id) =>
+  players.findIndex(p => p.id === id);
+
+export const findPlayerById = (players, id) => players.find(p => p.id === id);

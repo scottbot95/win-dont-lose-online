@@ -19,7 +19,7 @@ const Main = props => {
 };
 
 const mapStateToProps = state => ({
-  gameState: state.status
+  gameState: state.gameState.flags
 });
 
 export default connect(mapStateToProps)(Main);

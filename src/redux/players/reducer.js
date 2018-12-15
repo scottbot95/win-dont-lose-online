@@ -7,6 +7,7 @@ import {
   ADD_KEEPER
 } from './constants';
 import { RESET } from '../constants';
+import { findIndexById, findPlayerById } from './actions';
 
 let nextId = 0;
 
@@ -15,7 +16,7 @@ const reducer = (state = initialState, action) => {
   let playerIdx;
   switch (action.type) {
     case ADD_PLAYER:
-      if (state.find(p => p.name === action.name))
+      if (findPlayerById())
         throw new Error('Cannot have duplicate named players');
       player = {
         name: action.name,
@@ -26,7 +27,7 @@ const reducer = (state = initialState, action) => {
       };
       return [...state, player];
     case ADD_CARD_TO_HAND:
-      playerIdx = state.findIndex(p => p.id === action.playerId);
+      playerIdx = findIndexById(state, action.playerId);
       if (playerIdx !== -1) {
         player = state[playerIdx];
         return [
@@ -37,7 +38,7 @@ const reducer = (state = initialState, action) => {
         return state;
       }
     case ADD_KEEPER:
-      playerIdx = state.findIndex(p => p.id === action.playerId);
+      playerIdx = findIndexById(state, action.playerId);
       if (playerIdx !== -1) {
         player = state[playerIdx];
         return [
