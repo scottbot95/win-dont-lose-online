@@ -8,6 +8,24 @@ const GameStatus = {
 };
 Object.freeze(GameStatus);
 
+const mapEvtHandlers = (handlers, func) => {
+  const newHandlers = {};
+  const events = Object.keys(handlers);
+  for (const evt of events) {
+    const handlerOrArray = handlers[evt];
+    if (Array.isArray(handlerOrArray)) {
+      newHandlers[evt] = [];
+      for (const handler of handlerOrArray) {
+        newHandlers.push(func(handler));
+      }
+    } else if (handlerOrArray) {
+      newHandlers[evt] = func(handlerOrArray);
+    }
+  }
+
+  return newHandlers;
+};
+
 const forEachEvtHandler = (handlers, func) => {
   const events = Object.keys(handlers);
   for (const evt of events) {
@@ -24,9 +42,10 @@ const forEachEvtHandler = (handlers, func) => {
 
 const clearAllHandlers = (emitters, handlers) => {
   const clearAll = (evt, handler) => emtr => emtr.off(evt, handler);
-  forEachEvtHandler(handlers, (evt, handler) =>
-    emitters.forEach(clearAll(evt, handler))
-  );
+  forEachEvtHandler(handlers, (evt, handler) => {
+    if (Array.isArray(emitters)) emitters.forEach(clearAll(evt, handler));
+    else clearAll(evt, handler)(emitters);
+  });
 };
 
 const registerAllHandlers = (emitter, handlers) => {
@@ -41,13 +60,20 @@ const registerHandleToAll = (emitters, event, handler) => {
 
 class Game {
   constructor() {
-    this.players = [];
+    this.players = {};
     this.drawPile = [];
     this.discardPile = [];
     this.activePlayer = 0;
     this.gameStatus = GameStatus.PENDING;
     this._emitters = [];
-    this._handlers = require('./handlers');
+
+    this._bindHandler = this._bindHandler.bind(this);
+    this._handlers = mapEvtHandlers(require('./handlers'), this._bindHandler);
+  }
+
+  _bindHandler(handler) {
+    const bound = handler.bind(this);
+    return bound;
   }
 
   _emitAll(event, ...data) {
@@ -89,20 +115,20 @@ class Game {
     this._unregisterHandlers(emitter);
   }
 
-  addPlayer(name) {
+  addPlayer(name, sessionId) {
     const newPlayer = new Player(name);
-    if (this.players.length === 0) newPlayer.isVIP = true;
-    this.players.push(newPlayer);
+    if (Object.keys(this.players).length === 0) newPlayer.isVIP = true;
+    this.players[sessionId] = newPlayer;
     return newPlayer;
   }
 
   startGame(deck) {
     this.drawPile = deck;
-    this.players.forEach(plyr => {
+    for (const player of this.players) {
       const card = this.drawPile[0];
       this.drawPile = this.drawPile.slice(1);
-      this._emitAll('addCard', { playerId: plyr.id, card });
-    });
+      this._emitAll('addCard', { playerId: player.id, card });
+    }
     this.gameStatus = GameStatus.PLAYING;
     this._emitAll('startGame');
   }

@@ -1,8 +1,8 @@
-const game = require('./index');
-
 module.exports = {
-  newPlayer: (name, ack) => {
-    const player = game.addPlayer(name);
-    ack(player);
+  newPlayer: function(name, ack) {
+    console.log(arguments);
+    const player = this.addPlayer(name);
+    console.log(player);
+    typeof ack === 'function' && ack(player);
   }
 };

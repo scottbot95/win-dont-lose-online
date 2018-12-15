@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const volleyball = require('volleyball');
+const cors = require('cors');
 
 const app = express();
 
@@ -12,6 +13,9 @@ if (process.env.NODE_ENV.toLocaleLowerCase() === 'production') {
 } else {
   console.log('STARTING IN DEVELOPMENT MODE');
 }
+
+// cors middleware
+app.use(cors({ credentials: true, origin: true }));
 
 // session middleware
 app.use(require('./session'));
