@@ -1,0 +1,5 @@
+export const SET_DRAW_PILE = 'SET_DRAW_PILE';
+export const SET_DISCARD_PILE = 'SET_DISCARD_PILE';
+export const ADD_TO_DRAW_PILE = 'ADD_TO_DRAW_PILE';
+export const ADD_TO_DISCARD_PILE = 'ADD_TO_DISCARD_PILE';
+export const DRAW_CARD = 'DRAW_CARD';

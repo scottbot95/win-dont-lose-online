@@ -1,8 +1,18 @@
-import { ADD_PLAYER } from './constants';
+import { ADD_PLAYER, ADD_CARD_TO_HAND, ADD_KEEPER } from './constants';
 
-export const addPlayer = name => {
-  return {
-    type: ADD_PLAYER,
-    name
-  };
-};
+export const addPlayer = name => ({
+  type: ADD_PLAYER,
+  name
+});
+
+export const addCardToHand = (playerId, card) => ({
+  type: ADD_CARD_TO_HAND,
+  card,
+  playerId
+});
+
+export const addKeeper = (playerId, card) => ({
+  type: ADD_KEEPER,
+  card,
+  playerId
+});
