@@ -1,17 +1,22 @@
 import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import rootReducer from './rootReducer';
 
-const isInTest = typeof global.it === 'function';
+const middleware = [thunk];
 
-const store = isInTest
-  ? createStore(rootReducer)
-  : createStore(
-      rootReducer,
-      // composeEnhancers(applyMiddleware(/*...*/))
-      window &&
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+let store;
+
+const isInTest = typeof global.it === 'function';
+if (isInTest) {
+  store = createStore(rootReducer);
+} else {
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(...middleware))
+  );
+}
 
 export { store };

@@ -5,7 +5,6 @@ import PlayerForm from './PlayerForm';
 
 const PlayerInput = props => {
   const players = Object.keys(props.players).map(key => props.players[key]);
-  console.log(players);
   return (
     <div>
       <PlayerForm />

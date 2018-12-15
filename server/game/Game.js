@@ -59,6 +59,9 @@ class Game {
   addEmitter(emitter) {
     this._emitters.push(emitter);
     this._registerHandlers(emitter);
+    if (this._handlers.connect) {
+      this._handlers.connect(emitter);
+    }
   }
 
   removeEmitter(emitter) {
@@ -72,10 +75,18 @@ class Game {
   }
 
   addPlayer(name, sessionId) {
-    const newPlayer = new Player(name);
-    if (Object.keys(this.players).length === 0) newPlayer.isVIP = true;
-    this.players[sessionId] = newPlayer;
-    return newPlayer;
+    let player;
+    if (this.players[sessionId]) {
+      console.warn('Overwriting player with duplicate id');
+      player = this.players[sessionId];
+      player.name = name;
+    } else {
+      player = new Player(name);
+      if (Object.keys(this.players).length === 0) player.isVIP = true;
+      this.players[sessionId] = player;
+    }
+
+    return player;
   }
 
   startGame(deck) {
