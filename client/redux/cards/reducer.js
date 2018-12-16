@@ -10,6 +10,7 @@ import {
 import { RESET } from '../constants';
 
 const reducer = (state = initialState, action) => {
+  let cardIdx;
   switch (action.type) {
     case SET_DRAW_PILE:
       return { ...state, drawPile: action.cards };
@@ -20,7 +21,18 @@ const reducer = (state = initialState, action) => {
     case ADD_TO_DISCARD_PILE:
       return { ...state, discardPile: [action.card, ...state.discardPile] };
     case DRAW_CARD:
-      return { ...state, drawPile: state.drawPile.slice(1) };
+      cardIdx = state.drawPile.findIndex(card => card.id === action.card.id);
+      if (cardIdx === -1) {
+        console.warn('Attempted to draw card not in draw pile');
+        return state;
+      }
+      return {
+        ...state,
+        drawPile: [
+          ...state.drawPile.slice(0, cardIdx),
+          ...state.drawPile.slice(cardIdx + 1)
+        ]
+      };
     case RESET:
       return initialState;
     default:

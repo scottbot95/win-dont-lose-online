@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import initialState from './initialState';
 import {
   ADD_PLAYER,
@@ -20,6 +19,14 @@ const reducer = (state = initialState, action) => {
       return { ...initialState, ...action.players };
     case SET_ME:
       return { ...state, me: action.player };
+    case ADD_CARD_TO_HAND:
+      return {
+        ...state,
+        [action.playerId]: {
+          ...state[action.playerId],
+          hand: [...state[action.playerId].hand, action.card]
+        }
+      };
     case RESET:
       return initialState;
     default:

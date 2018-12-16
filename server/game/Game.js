@@ -93,12 +93,14 @@ class Game {
     this.drawPile = deck;
     this.gameStatus = GameStatus.PLAYING;
     this._emitAll('startGame', deck);
-    for (const sessionId in this.players) {
-      if (!this.players.hasOwnProperty(sessionId)) continue;
-      const player = this.players[sessionId];
-      const card = this.drawPile[0];
-      this.drawPile = this.drawPile.slice(1);
-      this._emitAll('addCard', { playerId: player.id, card });
+    for (let i = 0; i < 3; i++) {
+      for (const sessionId in this.players) {
+        if (!this.players.hasOwnProperty(sessionId)) continue;
+        const player = this.players[sessionId];
+        const card = this.drawPile[0];
+        this.drawPile = this.drawPile.slice(1);
+        this._emitAll('drawCard', { playerId: player.id, card });
+      }
     }
   }
 }

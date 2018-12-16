@@ -6,7 +6,8 @@ import {
   DRAW_CARD
 } from './constants';
 
-import { addCardToHand } from '../players';
+import { addCardToHandFast } from '../players';
+import { throttleAndQueueThunk } from '../utils';
 
 export const setDrawPile = cards => ({
   type: SET_DRAW_PILE,
@@ -28,9 +29,12 @@ export const addToDiscardPile = card => ({
   card
 });
 
-export const drawCard = playerId => (dispatch, getState) => {
+export const drawCard = ({ playerId, card }) => (dispatch, getState) => {
   const state = getState();
   const topCard = state.cards.drawPile[0];
-  dispatch({ type: DRAW_CARD });
-  dispatch(addCardToHand(playerId, topCard));
+  card = card || topCard;
+  dispatch({ type: DRAW_CARD, card });
+  dispatch(addCardToHandFast(playerId, card));
 };
+
+export const drawCardSlow = throttleAndQueueThunk(drawCard, 1000);
