@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_GAME:
       // return { ...state, flags: GameStateEnum.PLAYING };
-      console.log('STARTING GAME (not really....)');
+      console.log('STARTING GAME (not really....)', action.cards);
       return state;
     case RESET:
       return initialState;

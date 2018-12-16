@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import PlayerForm from './PlayerForm';
 import { changeName, getPlayerArray } from '../redux/players';
+import { sendStartGame } from '../redux/gameState';
+
+import basicCards from '../game/cards';
 
 const PlayerInput = props => {
   return (
@@ -29,7 +32,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changeName: name => dispatch(changeName(name)),
-  startGame: () => dispatch()
+  startGame: () => dispatch(sendStartGame(basicCards))
 });
 
 export default connect(
