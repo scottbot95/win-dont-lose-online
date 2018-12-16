@@ -13,7 +13,7 @@ const PlayerInput = props => {
           <li key={player.id}>{player.name}</li>
         ))}
       </ul>
-      {props.me.isVip && (
+      {props.me.isVIP && (
         <button type="button" onClick={props.startGame}>
           Start Game
         </button>

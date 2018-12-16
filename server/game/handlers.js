@@ -18,9 +18,11 @@ module.exports = {
     if (socketPlayer) socket.emit('setMe', socketPlayer);
   },
   startGame: function(socket, cards) {
-    if (this.players[socket.request.session.id].isVip) {
+    if (this.players[socket.request.session.id].isVIP) {
       console.log('Vip Requested Game start. Starting Game');
       io.emit('startGame', cards);
+    } else {
+      console.warn('Non VIP requested game start. Ignoring...');
     }
   }
 };
