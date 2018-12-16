@@ -176,6 +176,14 @@
   border-right: solid 1px black;
 }
 
+.vip {
+  font-weight: bold;
+}
+.vip::before,
+.vip::after {
+  content: '*';
+}
+
 /* Temporary for testing */
 /* .circleContainer p {
   width: 4em;

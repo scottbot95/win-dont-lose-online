@@ -13,11 +13,17 @@ const PlayerInput = props => {
       <PlayerForm submit={props.changeName} />
       <ul>
         {props.players.map(player => (
-          <li key={player.id}>{player.name}</li>
+          <li key={player.id}>
+            <span className={player.isVIP && 'vip'}>{player.name}</span>
+          </li>
         ))}
       </ul>
       {props.me.isVIP && (
-        <button type="button" onClick={props.startGame}>
+        <button
+          type="button"
+          onClick={props.startGame}
+          disabled={props.players.length < 2}
+        >
           Start Game
         </button>
       )}
