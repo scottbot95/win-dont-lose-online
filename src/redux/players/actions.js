@@ -4,7 +4,8 @@ import {
   ADD_PLAYER,
   ADD_CARD_TO_HAND,
   ADD_KEEPER,
-  GOT_PLAYERS_FROM_SERVER
+  GOT_PLAYERS_FROM_SERVER,
+  SET_ME
 } from './constants';
 
 export const addPlayer = player => ({
@@ -20,6 +21,11 @@ export const gotPlayersFromServer = players => ({
 export const changeName = name => () => {
   socket.emit('newPlayer', name);
 };
+
+export const setMe = player => ({
+  type: SET_ME,
+  player
+});
 
 export const addCardToHand = (playerId, card) => ({
   type: ADD_CARD_TO_HAND,

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import GameBoardPresentational from './GameBoardPresentational';
+import { getPlayerArray } from '../../redux/players';
 
 class GameBoard extends React.Component {
   constructor() {
@@ -34,9 +35,10 @@ class GameBoard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  players: state.players,
+  players: getPlayerArray(state.players),
   drawPile: state.drawPile,
-  discardPile: state.discardPile
+  discardPile: state.discardPile,
+  me: state.players.me
 });
 
 const mapDispatchToProps = dispatch => ({});

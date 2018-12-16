@@ -1,6 +1,10 @@
 import socket from './socket';
 import { store } from '../redux';
-import { addPlayer, gotPlayersFromServer } from '../redux/players/actions';
+import {
+  addPlayer,
+  gotPlayersFromServer,
+  setMe
+} from '../redux/players/actions';
 
 socket.on('newPlayer', player => {
   console.log('Adding player to redux store');
@@ -10,4 +14,9 @@ socket.on('newPlayer', player => {
 socket.on('loadPlayers', players => {
   console.log('LOADING PLAYERS', players);
   store.dispatch(gotPlayersFromServer(players));
+});
+
+socket.on('setMe', player => {
+  console.log('Setting `me`');
+  store.dispatch(setMe(player));
 });
