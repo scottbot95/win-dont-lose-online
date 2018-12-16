@@ -7,6 +7,7 @@ import {
   GOT_PLAYERS_FROM_SERVER,
   SET_ME
 } from './constants';
+import { throttleAndQueueThunk } from '../utils';
 
 export const addPlayer = player => ({
   type: ADD_PLAYER,
@@ -27,11 +28,17 @@ export const setMe = player => ({
   player
 });
 
-export const addCardToHand = (playerId, card) => ({
+const _addCardToHand = (playerId, card) => ({
   type: ADD_CARD_TO_HAND,
   card,
   playerId
 });
+
+export const addCardToHand = throttleAndQueueThunk(_addCardToHand, 500);
+
+export const addCardToHandSlow = throttleAndQueueThunk(_addCardToHand, 1000);
+
+export const addCardToHandFast = _addCardToHand;
 
 export const addKeeper = (playerId, card) => ({
   type: ADD_KEEPER,

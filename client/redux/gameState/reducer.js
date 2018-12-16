@@ -7,13 +7,14 @@ import {
   GameStateEnum
 } from './constants';
 import { RESET } from '../constants';
+import { SET_ACTIVE_PLAYER } from './constants';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_GAME:
-      // return { ...state, flags: GameStateEnum.PLAYING };
-      console.log('STARTING GAME (not really....)', action.cards);
-      return state;
+      return { ...state, flags: GameStateEnum.PLAYING };
+    case SET_ACTIVE_PLAYER:
+      return { ...state, activePlayerId: action.id };
     case RESET:
       return initialState;
     default:
