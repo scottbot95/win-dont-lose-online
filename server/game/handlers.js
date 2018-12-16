@@ -16,5 +16,11 @@ module.exports = {
     }
     socket.emit('loadPlayers', players);
     if (socketPlayer) socket.emit('setMe', socketPlayer);
+  },
+  startGame: function(socket, cards) {
+    if (this.players[socket.request.session.id].isVip) {
+      console.log('Vip Requested Game start. Starting Game');
+      io.emit('startGame', cards);
+    }
   }
 };

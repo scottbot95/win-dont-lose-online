@@ -1,3 +1,5 @@
+import socket from '../../socket';
+
 import {
   REVERSE_TURN_ORDER,
   END_GAME,
@@ -15,3 +17,7 @@ export const startGame = cards => ({
   type: START_GAME,
   cards
 });
+
+export const sendStartGame = cards => () => {
+  socket.emit('startGame', cards);
+};

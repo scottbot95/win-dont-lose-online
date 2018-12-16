@@ -13,8 +13,11 @@ const PlayerInput = props => {
           <li key={player.id}>{player.name}</li>
         ))}
       </ul>
-      <button type="button">Start Game</button>
-      {props.me && <div>{props.me.name}</div>}
+      {props.me.isVip && (
+        <button type="button" onClick={props.startGame}>
+          Start Game
+        </button>
+      )}
     </div>
   );
 };
@@ -25,7 +28,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeName: name => dispatch(changeName(name))
+  changeName: name => dispatch(changeName(name)),
+  startGame: () => dispatch()
 });
 
 export default connect(
