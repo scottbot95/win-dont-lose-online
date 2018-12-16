@@ -18,7 +18,7 @@ const GameBoardPresentational = props => {
             key={player.id}
             player={player}
             playCard={i === 0 && props.playCard}
-            me={player.id === me.id}
+            me={player.id === props.me.id}
           />
         ))}
       </CirclePlacer>

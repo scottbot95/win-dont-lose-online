@@ -29,5 +29,5 @@ export const triggerGameStart = cards => dispatch => {
 };
 
 export const sendStartGame = cards => () => {
-  socket.emit('startGame', cards);
+  socket.emit('startGame', cards.map(c => c.id));
 };

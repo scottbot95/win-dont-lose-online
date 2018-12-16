@@ -1,7 +1,9 @@
 import socket from './socket';
 import { store } from '../redux';
-import { startGame } from '../redux/gameState';
+import { triggerGameStart } from '../redux/gameState';
+import { findCardById } from '../game/cards';
 
-socket.on('startGame', cards => {
-  store.dispatch(startGame(cards));
+socket.on('startGame', cardIds => {
+  const cards = cardIds.map(findCardById);
+  store.dispatch(triggerGameStart(cards));
 });

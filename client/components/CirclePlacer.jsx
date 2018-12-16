@@ -136,7 +136,7 @@ CirclePlacer.propTypes = {
   /** Whether or not to draw circles represending the circle's radius and outside padding  */
   drawCircle: PropTypes.bool,
   /** Rotatation after placement on circle */
-  rotate: PropTypes.oneOf(['none', 'tanget']),
+  rotate: PropTypes.oneOf(['none', 'tangent']),
   /** If specified, pass the angle each element is as a prop given my `passTheta` */
   passTheta: PropTypes.string
 };

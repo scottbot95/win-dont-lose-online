@@ -12,13 +12,8 @@ class GameBoard extends React.Component {
     this.playCard = this.playCard.bind(this);
   }
 
-  componentDidMount() {
-    // let remainingCards = this.props.players.length * 3;
-    // const interval = setInterval(() => {
-    //   this.props.drawCard();
-    //   this.props.endTurn();
-    //   if (--remainingCards === 0) clearInterval(interval);
-    // }, 500);
+  playCard() {
+    console.log('PLAYING CARD', ...arguments);
   }
 
   render() {
@@ -29,6 +24,7 @@ class GameBoard extends React.Component {
         discardPile={this.props.discardPile}
         drawCard={this.props.drawCard}
         playCard={this.playCard}
+        me={this.props.me}
       />
     );
   }
@@ -36,8 +32,8 @@ class GameBoard extends React.Component {
 
 const mapStateToProps = state => ({
   players: getPlayerArray(state.players),
-  drawPile: state.drawPile,
-  discardPile: state.discardPile,
+  drawPile: state.cards.drawPile,
+  discardPile: state.cards.discardPile,
   me: state.players.me
 });
 

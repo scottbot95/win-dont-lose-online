@@ -20,7 +20,7 @@ module.exports = {
   startGame: function(socket, cards) {
     if (this.players[socket.request.session.id].isVIP) {
       console.log('Vip Requested Game start. Starting Game');
-      io.emit('startGame', cards);
+      this.startGame(cards);
     } else {
       console.warn('Non VIP requested game start. Ignoring...');
     }
